@@ -1,12 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fridge2Fork</title>
+  <!-- ✅ Tailwind CDN for development -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
+  <!-- ✅ Font Awesome (no integrity to avoid blocking) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-<body>
-    
+  <body class="bg-gray-50 text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+      <div class="max-w-6xl mx-auto px-4 py-6 text-center">
+        <h1 class="text-4xl font-bold text-green-600">Fridge2Fork</h1>
+        <p class="text-lg text-gray-600 mt-1"> 👩‍🍳 Welcome to your kitchen buddy — where cravings meet creativity and meals come to life!</p>
+      </div>
+    </header>
+
+    <!-- Intro Section -->
+    <section class="max-w-6xl mx-auto px-4 py-10">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <!-- Ingredient-based search card -->
+    <div class="bg-white p-6 rounded-xl shadow-lg text-center">
+      <p class="text-gray-700 text-lg mb-6">
+        🧺 Got ingredients but not sure what to whip up? Type in what you have, and discover tasty recipes you can make right away!
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <input
+          type="text"
+          placeholder="e.g., chicken, rice, tomato"
+          class="w-full sm:w-80 px-4 py-3 rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-green-500 focus:outline-none"
+        />
+        <button id="find" class="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition font-semibold">
+          Find Recipes
+        </button>
+      </div>
+    </div>
+
+    <!-- Dish name-based search card -->
+    <div class="bg-white p-6 rounded-xl shadow-lg text-center">
+      <p class="text-gray-700 text-lg mb-6">
+        🍽️ Know the dish but need the steps? Just enter the name and let us show you how to bring it to life,one by one step at a time!
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <input
+          type="text"
+          placeholder="e.g., lasagna, misir wot, sushi"
+          class="w-full sm:w-80 px-4 py-3 rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-green-500 focus:outline-none"
+        />
+        <button id="show" class="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition font-semibold">
+          Show Steps
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <!-- Recipe Cards -->
+    <section class="max-w-7xl mx-auto px-4 py-10">
+      <h2 class="text-2xl font-semibold mb-6 text-center text-gray-700">Popular Recipes</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Card -->
+        <div class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <img src="asset/1.jpg" class="w-full h-48 object-cover"  />
+          <div class="p-4">
+            <h3 class="text-lg font-semibold text-gray-800">Creamy Alfredo Pasta</h3>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <img src="asset/1 (1).jpg" class="w-full h-48 object-cover"  />
+          <div class="p-4">
+            <h3 class="text-lg font-semibold text-gray-800">Avocado Quinoa Salad</h3>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <img src="asset/1 (2).jpg" class="w-full h-48 object-cover"  />
+          <div class="p-4">
+            <h3 class="text-lg font-semibold text-gray-800">Grilled Chicken Burger</h3>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <img src="asset/1 (3).jpg" class="w-full h-48 object-cover"  />
+          <div class="p-4">
+            <h3 class="text-lg font-semibold text-gray-800">Spicy Lentil Curry</h3>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <img src="asset/1 (4).jpg" class="w-full h-48 object-cover"  />
+          <div class="p-4">
+            <h3 class="text-lg font-semibold text-gray-800">Veggie Stir-fry Noodles</h3>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <img src="asset/1 (5).jpg" class="w-full h-48 object-cover"  />
+          <div class="p-4">
+            <h3 class="text-lg font-semibold text-gray-800">Homemade Margherita Pizza</h3>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+  <img src="asset/1 (6).jpg" class="w-full h-48 object-cover" />
+  <div class="p-4">
+    <h3 class="text-lg font-semibold text-gray-800">Spicy Pepperoni Pizza</h3>
+  </div>
+</div>
+
+<div class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+  <img src="asset/1 (7).jpg" class="w-full h-48 object-cover"  />
+  <div class="p-4">
+    <h3 class="text-lg font-semibold text-gray-800">Truffle Mushroom Pizza</h3>
+  </div>
+</div>
+
+<div class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+  <img src="asset/1 (8).jpg" class="w-full h-48 object-cover"  />
+  <div class="p-4">
+    <h3 class="text-lg font-semibold text-gray-800">Four Cheese Pizza</h3>
+  </div>
+</div>
+
+<div class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+  <img src="asset/1 (9).jpg" class="w-full h-48 object-cover"  />
+  <div class="p-4">
+    <h3 class="text-lg font-semibold text-gray-800">BBQ Chicken Pizza</h3>
+  </div>
+</div>
+
+<div class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+  <img src="asset/1 (10).jpg" class="w-full h-48 object-cover"  />
+  <div class="p-4">
+    <h3 class="text-lg font-semibold text-gray-800">Spinach & Feta Pizza</h3>
+  </div>
+</div>
+
+<div class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+  <img src="asset/1 (11).jpg" class="w-full h-48 object-cover"  />
+  <div class="p-4">
+    <h3 class="text-lg font-semibold text-gray-800">Smoked Sausage Pizza</h3>
+  </div>
+</div>
+
+      </div>
+    </section>
+
+    <!-- Coming Soon Section -->
+    <section class="bg-gradient-to-r from-blue-50 to-purple-100 py-16 px-4">
+      <div class="max-w-5xl mx-auto bg-white shadow-xl rounded-2xl p-10 border-t-4 border-purple-500">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-center text-gray-800 mb-10">
+          🚧 Coming Soon to Fridge2Fork
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-gray-700 text-base">
+          <div>
+            <p class="mb-3"><span class="font-semibold">🍴 Meal Planner:</span> Plan your week with AI-generated recipes.</p>
+            <p class="mb-3"><span class="font-semibold">📦 Pantry Sync:</span> Sync your real fridge/pantry with the app to get accurate recipe suggestions.</p>
+            <p><span class="font-semibold">🔖 Save Recipes:</span> Bookmark your favorite dishes for quick access later.</p>
+          </div>
+          <div>
+            <p class="mb-3"><span class="font-semibold">📋 Shopping List:</span> Auto-generate shopping lists from your chosen meals.</p>
+            <p class="mb-3"><span class="font-semibold">🎙️ Voice Mode:</span> Use voice to search, save, and plan meals hands-free.</p>
+            <p><span class="font-semibold">📱 Offline Access:</span> Download recipes and lists for offline cooking anywhere.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300">
+      <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 grid sm:grid-cols-3 gap-8">
+        <div>
+          <h3 class="text-white text-xl font-bold mb-2">Fridge2Fork</h3>
+          <p>Turn your fridge into a flavor adventure — discover dishes, master recipes, and let every meal spark a little joy. 🍳</p>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-2">Contact</h4>
+          <p>Email: <a href="mailto:eazybel27@gmail.com" class="text-blue-400 hover:underline">eazybel27@gmail.com</a></p>
+          <p>Phone: +2519-405-843-23</p>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-2">Contact Us</h4>
+          <div class="flex gap-4">
+        <a href="https://linkedin.com/in/syntaxdesigns" class="hover:text-blue-500 transition text-xl"><i class="fab fa-linkedin-in"></i></a>
+        <a href="t.me/syntaxdesigns" class="hover:text-pink-400 transition text-xl"><i class="fab fa-telegram"></i></a>
+        <a href="www.syntax.pro.et" class="hover:text-sky-400 transition text-xl"><i class="fa-solid fa-globe"></i></a>
+      </div>
+        </div>
+      </div>
+      <div class="text-center text-sm border-t border-gray-700 pt-4 pb-6">
+        © 2025 Syntax Designs. All rights reserved.
+      </div>
+    </footer>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>

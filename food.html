@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recipe Viewer | Fridge2Fork</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  </head>
+  <body class="bg-gray-50 text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+      <div class="max-w-6xl mx-auto px-4 py-6 text-center">
+        <h1 class="text-3xl font-bold text-green-600">Here’s your recipe!</h1>
+        <p class="mt-2 text-gray-600">If it doesn’t taste quite like home, maybe your mama’s magic touch is the missing ingredient. 🥣</p>
+      </div>
+    </header>
+
+    <!-- Recipe Content -->
+    <section class="max-w-4xl mx-auto px-4 py-10 space-y-8">
+      <!-- Image -->
+      <div class="rounded-xl overflow-hidden shadow-md">
+        <img src="https://source.unsplash.com/800x400/?food" alt="Recipe Image" class="w-full h-auto object-cover" />
+      </div>
+
+      <!-- Name & Category -->
+      <div class="text-center">
+        <h2 class="text-2xl font-bold text-gray-800">Spaghetti Carbonara</h2>
+        <p class="text-sm text-gray-500 mt-1">Category: Italian Pasta</p>
+      </div>
+
+      <!-- Ingredients Table -->
+      <div>
+        <h3 class="text-xl font-semibold text-gray-800 mb-4">🧂 Ingredients</h3>
+        <div class="overflow-x-auto">
+          <table class="min-w-full table-auto border border-gray-200 text-left">
+            <thead class="bg-green-100">
+              <tr>
+                <th class="px-4 py-2 font-medium text-gray-700">Ingredient</th>
+                <th class="px-4 py-2 font-medium text-gray-700">Amount</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white">
+              <tr class="border-t">
+                <td class="px-4 py-2">Spaghetti</td>
+                <td class="px-4 py-2">200g</td>
+              </tr>
+              <tr class="border-t">
+                <td class="px-4 py-2">Eggs</td>
+                <td class="px-4 py-2">2 large</td>
+              </tr>
+              <tr class="border-t">
+                <td class="px-4 py-2">Parmesan Cheese</td>
+                <td class="px-4 py-2">1/2 cup grated</td>
+              </tr>
+              <tr class="border-t">
+                <td class="px-4 py-2">Pancetta</td>
+                <td class="px-4 py-2">100g</td>
+              </tr>
+              <tr class="border-t">
+                <td class="px-4 py-2">Black Pepper</td>
+                <td class="px-4 py-2">To taste</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Instructions -->
+      <div>
+        <h3 class="text-xl font-semibold text-gray-800 mb-4">📝 Instructions</h3>
+        <ol class="list-decimal list-inside space-y-2 text-gray-700">
+          <li>Boil spaghetti until al dente. Reserve a bit of pasta water.</li>
+          <li>Fry pancetta until crispy. Set aside.</li>
+          <li>Whisk eggs with Parmesan and pepper in a bowl.</li>
+          <li>Mix hot pasta with pancetta, then quickly add the egg mixture off the heat, stirring fast.</li>
+          <li>If needed, add pasta water to create a creamy sauce. Serve hot!</li>
+        </ol>
+      </div>
+
+      <!-- YouTube Video -->
+      <div>
+        <h3 class="text-xl font-semibold text-gray-800 mb-4">🎥 Watch Tutorial</h3>
+        <div class="aspect-w-16 aspect-h-9 rounded-xl overflow-hidden shadow-md">
+          <iframe
+            class="w-full h-64 sm:h-96"
+            src="https://www.youtube.com/embed/3AAdKl1UYZs"
+            title="YouTube video player"
+            frameborder="0"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+
+      <!-- Blog Redirect -->
+      <div class="text-center mt-12">
+        <p class="text-lg text-gray-700 mb-3">Want to read more tips and tricks about this recipe?</p>
+        <a
+          href="https://your-blog-link.com"
+          target="_blank"
+          class="inline-block bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition font-semibold"
+        >
+          Read Full Blog Post →
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer (Same As Before) -->
+    <footer class="bg-gray-900 text-gray-300 mt-16">
+      <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 grid sm:grid-cols-3 gap-8">
+        <div>
+          <h3 class="text-white text-xl font-bold mb-2">SkillQuest</h3>
+          <p>Level up your skills with curated learning paths and exciting challenges.</p>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-2">Contact</h4>
+          <p>Email: <a href="mailto:eazybel27@gmail.com" class="text-blue-400 hover:underline">eazybel27@gmail.com</a></p>
+          <p>Phone: +2519-405-843-23</p>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-2">Contact Us</h4>
+          <div class="flex space-x-4 text-white text-xl mt-2">
+            <a href="#" class="hover:text-blue-400">🔗</a>
+            <a href="#" class="hover:text-blue-400">✈️</a>
+            <a href="#" class="hover:text-blue-400">🌐</a>
+          </div>
+        </div>
+      </div>
+      <div class="text-center text-sm border-t border-gray-700 pt-4 pb-6">
+        © 2025 Syntax Designs. All rights reserved.
+      </div>
+    </footer>
+
+  </body>
+</html>
