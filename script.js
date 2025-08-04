@@ -19,7 +19,7 @@ show.onclick = async()=>{
      if(input2.value===""){
    return alert("Please Insert The Dish Name")
    }
-   const res= await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${input2.value}&number=30&apiKey=e17c67078f944c33989fb7b5b4b20f2e`)
+   const res= await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${input2.value}&number=30&apiKey=ed3941946fc44d8bb13024cd55d5a476`)
     const data=await res.json()
     localStorage.clear()
     for (let i = 0; i < data.results.length; i++) {
@@ -28,6 +28,6 @@ show.onclick = async()=>{
     }
 window.location="./food.html"
   } catch (error) {
-    console.log(error)
+     alert("Please type the exact food name")
   }
 }
