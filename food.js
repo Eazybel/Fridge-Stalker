@@ -23,12 +23,12 @@ const found=`<option value="${localStorage.getItem(i)}">${localStorage.getItem(i
 const defaulted=async() =>{
     spinner.classList.remove("hidden")
     main.style.display="none"
-  const res=await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${selected.value}&number=1&apiKey=ed3941946fc44d8bb13024cd55d5a476`)
+  const res=await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${selected.value}&number=1&apiKey=111e9b61931c419e856d4712ba13d208`)
   const data=await res.json()
   console.log(data)
   title.innerText=localStorage.getItem(0)
     const id=data.results[0].id
-   const res1= await fetch(`https://api.spoonacular.com/recipes/${id}/information?includeNutrition=true&apiKey=ed3941946fc44d8bb13024cd55d5a476`)
+   const res1= await fetch(`https://api.spoonacular.com/recipes/${id}/information?includeNutrition=true&apiKey=111e9b61931c419e856d4712ba13d208`)
     const data1=await res1.json()
      const tubeRes=await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=how+to+make+${data.results[0].title}&type=video&key=AIzaSyAP-oIoX3192ixcZbQ7IwEVYBZ9oTUmreM`)
      const tubeData=await tubeRes.json()
@@ -40,7 +40,11 @@ const defaulted=async() =>{
      foodImage.setAttribute("src",data1.image) 
      disc.innerText="Dish Type: "+data1.dishTypes
      data1.extendedIngredients.forEach(item => {
-        ingredients.innerHTML+=`<li>${item.name}</li>`
+        ingredients.innerHTML+=`<tr>
+                                  <td>${item.name}</td>
+                                  <td>${item.amount}</td>
+                                  <td>${item.measures.metric.unitLong}</td>
+                                </tr>`
      });
   setTimeout(() => {
     spinner.classList.add("hidden")
@@ -59,14 +63,14 @@ lookup.onclick=async()=>{
     
       main.style.display="none"
     spinner.classList.remove("hidden")
-    const res= await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${selected.value}&number=1&apiKey=ed3941946fc44d8bb13024cd55d5a476`)
+    const res= await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${selected.value}&number=1&apiKey=111e9b61931c419e856d4712ba13d208`)
     const data=await res.json()
    title.innerText=data.results[0].title
     const id=data.results[0].id
     
    
 
-   const res1= await fetch(`https://api.spoonacular.com/recipes/${id}/information?includeNutrition=true&apiKey=ed3941946fc44d8bb13024cd55d5a476`)
+   const res1= await fetch(`https://api.spoonacular.com/recipes/${id}/information?includeNutrition=true&apiKey=111e9b61931c419e856d4712ba13d208`)
     const data1=await res1.json()
      const tubeRes=await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=how+to+make+${data.results[0].title}&type=video&key=AIzaSyAP-oIoX3192ixcZbQ7IwEVYBZ9oTUmreM`)
      const tubeData=await tubeRes.json()
@@ -78,8 +82,14 @@ lookup.onclick=async()=>{
      foodImage.setAttribute("src",data1.image) 
      disc.innerText="Dish Type: "+data1.dishTypes
      data1.extendedIngredients.forEach(item => {
-        ingredients.innerHTML+=`<li>${item.name}</li>`
+        ingredients.innerHTML+=`<tr>
+                                  <td>${item.name}</td>
+                                  <td>${item.amount}</td>
+                                  <td>${item.measures.metric.unitLong}</td>
+                                </tr>`
+        
      });
+  
   setTimeout(() => {
     spinner.classList.add("hidden")
     main.style.display="block"
