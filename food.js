@@ -23,12 +23,12 @@ const found=`<option value="${localStorage.getItem(i)}">${localStorage.getItem(i
 const defaulted=async() =>{
     spinner.classList.remove("hidden")
     main.style.display="none"
-  const res=await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${selected.value}&number=1&apiKey=111e9b61931c419e856d4712ba13d208`)
+  const res=await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${localStorage.getItem(0)}&number=1&apiKey=061deef803d54c4e8034727f78f93b10`)
   const data=await res.json()
   console.log(data)
   title.innerText=localStorage.getItem(0)
     const id=data.results[0].id
-   const res1= await fetch(`https://api.spoonacular.com/recipes/${id}/information?includeNutrition=true&apiKey=111e9b61931c419e856d4712ba13d208`)
+   const res1= await fetch(`https://api.spoonacular.com/recipes/${id}/information?includeNutrition=true&apiKey=061deef803d54c4e8034727f78f93b10`)
     const data1=await res1.json()
      const tubeRes=await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=how+to+make+${data.results[0].title}&type=video&key=AIzaSyAP-oIoX3192ixcZbQ7IwEVYBZ9oTUmreM`)
      const tubeData=await tubeRes.json()
@@ -52,7 +52,7 @@ const defaulted=async() =>{
   }, 3000);
 
 }
-defaulted()
+// defaulted()
 
 lookup.onclick=async()=>{
     
@@ -63,14 +63,14 @@ lookup.onclick=async()=>{
     
       main.style.display="none"
     spinner.classList.remove("hidden")
-    const res= await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${selected.value}&number=1&apiKey=111e9b61931c419e856d4712ba13d208`)
+    const res= await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${selected.value}&number=1&apiKey=061deef803d54c4e8034727f78f93b10`)
     const data=await res.json()
    title.innerText=data.results[0].title
     const id=data.results[0].id
     
    
 
-   const res1= await fetch(`https://api.spoonacular.com/recipes/${id}/information?includeNutrition=true&apiKey=111e9b61931c419e856d4712ba13d208`)
+   const res1= await fetch(`https://api.spoonacular.com/recipes/${id}/information?includeNutrition=true&apiKey=061deef803d54c4e8034727f78f93b10`)
     const data1=await res1.json()
      const tubeRes=await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=how+to+make+${data.results[0].title}&type=video&key=AIzaSyAP-oIoX3192ixcZbQ7IwEVYBZ9oTUmreM`)
      const tubeData=await tubeRes.json()
