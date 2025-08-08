@@ -16,10 +16,10 @@ find.onclick = async()=>{
       const res= await fetch(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredient}&number=3&apiKey=e17c67078f944c33989fb7b5b4b20f2e`)
     const data=await res.json()
     for (let i = 0; i < data.length; i++) {
-      let {id,missedIngredients,usedIngredients,unusedIngredients}=data[i]
-     localStorage.setItem(i,JSON.stringify({id,missedIngredients,usedIngredients,unusedIngredients}))
+      let {id,missedIngredients,usedIngredients,unusedIngredients,title}=data[i]
+     localStorage.setItem(i,JSON.stringify({id,missedIngredients,usedIngredients,unusedIngredients,title}))
     }
-    window.location="./show.html"
+    console.log(data)
     } catch (error) {
       console.log(error)
     }
