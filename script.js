@@ -13,13 +13,13 @@ find.onclick = async()=>{
     
     try {
       localStorage.clear()
-      const res= await fetch(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredient}&number=3&apiKey=e17c67078f944c33989fb7b5b4b20f2e`)
+      const res= await fetch(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredient}&number=3&apiKey=6ac0520a7f964f07ae0a80fec737d889`)
     const data=await res.json()
     for (let i = 0; i < data.length; i++) {
       let {id,missedIngredients,usedIngredients,unusedIngredients,title}=data[i]
      localStorage.setItem(i,JSON.stringify({id,missedIngredients,usedIngredients,unusedIngredients,title}))
     }
-    console.log(data)
+    window.location="./show.html"
     } catch (error) {
       console.log(error)
     }
@@ -32,14 +32,14 @@ show.onclick = async()=>{
      if(input2.value===""){
    return alert("Please Insert The Dish Name")
    }
-   const res= await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${input2.value}&number=30&apiKey=e17c67078f944c33989fb7b5b4b20f2e`)
+   const res= await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${input2.value}&number=30&apiKey=6ac0520a7f964f07ae0a80fec737d889`)
     const data=await res.json()
     localStorage.clear()
     for (let i = 0; i < data.results.length; i++) {
         localStorage.setItem(i,data.results[i].title) 
        
     }
-window.location="./food.html"
+  window.location="./food.html"
   } catch (error) {
      alert("Please type the exact food name")
   }
