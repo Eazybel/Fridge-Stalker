@@ -21,22 +21,20 @@ const found=`<option value="${localStorage.getItem(i)}">${localStorage.getItem(i
 }
 
 const defaulted=async() =>{
-  spinner.classList.remove("hidden")
-    main.style.display="none"
-  const res=await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${localStorage.getItem(0)}&number=1&apiKey=6ac0520a7f964f07ae0a80fec737d889`)
+  
+  const res=await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${localStorage.getItem(0)}&number=1&apiKey=048c23bbdc0b4593a4bc33bce794d085`)
   const data=await res.json()
   console.log(data)
   title.innerText=localStorage.getItem(0)
     const id=data.results[0].id
-   const res1= await fetch(`https://api.spoonacular.com/recipes/${id}/information?includeNutrition=true&apiKey=6ac0520a7f964f07ae0a80fec737d889`)
+   const res1= await fetch(`https://api.spoonacular.com/recipes/${id}/information?includeNutrition=true&apiKey=048c23bbdc0b4593a4bc33bce794d085`)
     const data1=await res1.json()
-     const tubeRes=await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=how+to+make+${data.results[0].title}&type=video&key=AIzaSyAP-oIoX3192ixcZbQ7IwEVYBZ9oTUmreM`)
-     const tubeData=await tubeRes.json()
+    //  const tubeRes=await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=how+to+make+${data.results[0].title}&type=video&key=AIzaSyAP-oIoX3192ixcZbQ7IwEVYBZ9oTUmreM`)
+    //  const tubeData=await tubeRes.json()
     blog.setAttribute("href",data1.sourceUrl)
-    tube.setAttribute("href",data1.sourceUrl)
     instraction.innerHTML=data1.instructions
     console.log(data1)
-     tube.setAttribute("src",`https://www.youtube.com/embed/${tubeData.items[0].id.videoId}`)
+    //  tube.setAttribute("src",`https://www.youtube.com/embed/${tubeData.items[0].id.videoId}`)
      foodImage.setAttribute("src",data1.image) 
      disc.innerText="Dish Type: "+data1.dishTypes
      data1.extendedIngredients.forEach(item => {
@@ -46,10 +44,7 @@ const defaulted=async() =>{
                                   <td>${item.measures.metric.unitLong}</td>
                                 </tr>`
      });
-  setTimeout(() => {
-    spinner.classList.add("hidden")
-    main.style.display="block"
-  }, 3000);
+  
     
 
 }
@@ -61,45 +56,36 @@ lookup.onclick=async()=>{
         return alert("Please Select The Dish From The Options")
     }
   try {
-    
-      main.style.display="none"
-    spinner.classList.remove("hidden")
-    const res= await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${selected.value}&number=1&apiKey=6ac0520a7f964f07ae0a80fec737d889`)
+
+    const res= await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${selected.value}&number=1&apiKey=048c23bbdc0b4593a4bc33bce794d085`)
     const data=await res.json()
    title.innerText=data.results[0].title
     const id=data.results[0].id
     
    
 
-   const res1= await fetch(`https://api.spoonacular.com/recipes/${id}/information?includeNutrition=true&apiKey=6ac0520a7f964f07ae0a80fec737d889`)
+   const res1= await fetch(`https://api.spoonacular.com/recipes/${id}/information?includeNutrition=true&apiKey=048c23bbdc0b4593a4bc33bce794d085`)
     const data1=await res1.json()
-     const tubeRes=await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=how+to+make+${data.results[0].title}&type=video&key=AIzaSyAP-oIoX3192ixcZbQ7IwEVYBZ9oTUmreM`)
-     const tubeData=await tubeRes.json()
+    //  const tubeRes=await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=how+to+make+${data.results[0].title}&type=video&key=AIzaSyAP-oIoX3192ixcZbQ7IwEVYBZ9oTUmreM`)
+    //  const tubeData=await tubeRes.json()
     blog.setAttribute("href",data1.sourceUrl)
-    tube.setAttribute("href",data1.sourceUrl)
     instraction.innerHTML=data1.instructions
     console.log(data1)
-     tube.setAttribute("src",`https://www.youtube.com/embed/${tubeData.items[0].id.videoId}`)
+    //  tube.setAttribute("src",`https://www.youtube.com/embed/${tubeData.items[0].id.videoId}`)
      foodImage.setAttribute("src",data1.image) 
      disc.innerText="Dish Type: "+data1.dishTypes
      data1.extendedIngredients.forEach(item => {
-        ingredients.innerHTML+=`<tr>
-                                  <td>${item.name}</td>
-                                  <td>${item.amount}</td>
-                                  <td>${item.measures.metric.unitLong}</td>
-                                </tr>`
+        ingredients.innerHTML+=` <tr>
+      <th class="px-6 py-3 text-left text-sm font-semibold tracking-wider">${item.name}</th>
+      <th class="px-6 py-3 text-left text-sm font-semibold tracking-wider">${item.amount}</th>
+      <th class="px-6 py-3 text-left text-sm font-semibold tracking-wider">${item.measures.metric.unitLong}</th>
+    </tr>`
         
      });
   
-  setTimeout(() => {
-    spinner.classList.add("hidden")
-    main.style.display="block"
-  }, 1000);
+ 
   } catch (error) {
     console.log(error)
   }
-  setTimeout(() => {
-    spinner.classList.add("hidden")
-    main.style.display="block"
-  }, 3000);
+
 }
