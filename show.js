@@ -44,7 +44,7 @@ const identifier = async () => {
   </tbody>`;
   }
 
-  const res1= await fetch(`https://api.spoonacular.com/recipes/${data.id}/information?includeNutrition=true&apiKey=048c23bbdc0b4593a4bc33bce794d085`)
+  const res1= await fetch(`https://api.spoonacular.com/recipes/${data.id}/information?includeNutrition=true&apiKey=111e9b61931c419e856d4712ba13d208`)
       const data1=await res1.json()
       //  const tubeRes=await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=how+to+make+${data.title}&type=video&key=AIzaSyAP-oIoX3192ixcZbQ7IwEVYBZ9oTUmreM`)
       //  const tubeData=await tubeRes.json()
@@ -103,7 +103,7 @@ lookup.onclick = async () => {
   }
 
   console.log(outer);
-  const res1= await fetch(`https://api.spoonacular.com/recipes/${outer.id}/information?includeNutrition=true&apiKey=048c23bbdc0b4593a4bc33bce794d085`)
+  const res1= await fetch(`https://api.spoonacular.com/recipes/${outer.id}/information?includeNutrition=true&apiKey=111e9b61931c419e856d4712ba13d208`)
     const data1=await res1.json()
     // const tubeRes=await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=how+to+make+${outer.title}&type=video&key=AIzaSyAP-oIoX3192ixcZbQ7IwEVYBZ9oTUmreM`)
     //    const tubeData=await tubeRes.json()
