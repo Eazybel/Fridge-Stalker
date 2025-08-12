@@ -3,6 +3,25 @@ const show=document.getElementById("show")
 const input1=document.getElementById("input1")
 const input2=document.getElementById("input2")
 const table=document.getElementById("table")
+const popular=document.getElementById("popular")
+
+const random=async()=>{
+const res=await fetch(`https://api.spoonacular.com/recipes/random?number=12&tags=vegetarian,dessert&apiKey=e17c67078f944c33989fb7b5b4b20f2e`)
+const data=await res.json()
+data.recipes.forEach(food => {
+  const {title,image}=food
+  popular.innerHTML+=`<div class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+        <img src="${image}" class="w-full h-48 object-cover"  />
+        <div class="p-4">
+          <h3 class="text-lg font-semibold text-gray-800">${title}</h3>
+        </div>
+      </div>`
+});
+
+}
+random()
+
+
 
 find.onclick = async()=>{
   if(input1.value===""){
@@ -13,7 +32,7 @@ find.onclick = async()=>{
     
     try {
       localStorage.clear()
-      const res= await fetch(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredient}&number=20&apiKey=111e9b61931c419e856d4712ba13d208`)
+      const res= await fetch(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredient}&number=20&apiKey=061deef803d54c4e8034727f78f93b10`)
     const data=await res.json()
     for (let i = 0; i < data.length; i++) {
       let {id,missedIngredients,usedIngredients,unusedIngredients,title}=data[i]
@@ -32,10 +51,12 @@ show.onclick = async()=>{
      if(input2.value===""){
    return alert("Please Insert The Dish Name")
    }
-   const res= await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${input2.value}&number=200&apiKey=111e9b61931c419e856d4712ba13d208`)
+   const res= await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${input2.value}&number=200&apiKey=061deef803d54c4e8034727f78f93b10`)
     const data=await res.json()
     localStorage.clear()
-    for (let i = 0; i < data.results.length; i++) {
+    for (let i = 1; i < data.results.length; i++) {
+      let sent=input2.value.toUpperCase()
+        localStorage.setItem(0,sent) 
         localStorage.setItem(i,data.results[i].title) 
        
     }

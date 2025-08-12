@@ -1,6 +1,6 @@
-# 🍳 Fridge2Fork
+# 🍳 Fridge Stalker
 
-**Fridge2Fork** is a responsive recipe suggestion app that helps users decide what to cook based on available ingredients. Enter what's on hand — and discover meals you didn’t know were possible. Built for curious home cooks, students, and anyone fighting fridge fatigue.
+**Fridge Stalker** is a responsive recipe suggestion app that helps users decide what to cook based on available ingredients. Enter what's on hand — and discover meals you didn’t know were possible. Built for curious home cooks, students, and anyone fighting fridge fatigue.
 
 ---
 
