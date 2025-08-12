@@ -101,16 +101,12 @@ lookup.onclick = async () => {
     <!-- Add more rows dynamically -->
   </tbody>`;
   }
-
-  console.log(outer);
   const res1= await fetch(`https://api.spoonacular.com/recipes/${outer.id}/information?includeNutrition=true&apiKey=111e9b61931c419e856d4712ba13d208`)
     const data1=await res1.json()
-    // const tubeRes=await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=how+to+make+${outer.title}&type=video&key=AIzaSyAP-oIoX3192ixcZbQ7IwEVYBZ9oTUmreM`)
-    //    const tubeData=await tubeRes.json()
+    const tubeRes=await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=how+to+make+${outer.title}&type=video&key=AIzaSyAP-oIoX3192ixcZbQ7IwEVYBZ9oTUmreM`)
+       const tubeData=await tubeRes.json()
       blog.setAttribute("href",data1.sourceUrl)
-      // tube.setAttribute("href",https://www.youtube.com/embed/${tubeData.items[0].id.videoId})
+      tube.setAttribute("href",`https://www.youtube.com/embed/${tubeData.items[0].id.videoId}`)
       instraction.innerHTML=data1.instructions
-      //  tube.setAttribute("src",`https://www.youtube.com/embed/${tubeData.items[0].id.videoId}`)
    foodImage.setAttribute("src",data1.image)
-    console.log(data1)
 };
