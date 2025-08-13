@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fridge Stalker</title>
+  <!-- ✅ Tailwind CDN for development -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
+  <!-- ✅ Font Awesome (no integrity to avoid blocking) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+  
+  <body class="bg-gray-50 text-gray-800">
+    <div id="spinner" class="absolute hidden right-1/2 bottom-1/2 transform translate-x-1/2 translate-y-1/2">
+      <div class="p-4 bg-gradient-to-tr animate-spin from-green-500 to-blue-500 via-purple-500 rounded-full">
+        <div class="bg-white rounded-full">
+          <div class="w-24 h-24 rounded-full"></div>
+        </div>
+      </div>
+    </div>
+
+    <main>
+      <!-- Header -->
+      <header class="bg-white shadow-md">
+        <div class="max-w-6xl mx-auto px-4 py-6 text-center">
+          <h1 class="text-3xl font-bold text-green-600">Here are dishes you can make with what’s in your fridge!</h1>
+          <p class="mt-2 text-gray-600">If it’s not quite like home, maybe your mama’s magic touch is the missing ingredient. 🥣</p>
+        </div>
+      </header>
+
+      <!-- Dish Selection -->
+      <section class="max-w-md mx-auto px-4 py-6">
+        <div id="drop" class="mb-6">
+          <label for="food-select" class="block text-lg font-semibold text-green-600 mb-2">
+            Select available dishes you can make 🍽️
+          </label>
+          <select
+            id="food-select"
+            name="food"
+            class="w-full bg-white text-gray-800 border border-green-300 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-200 ease-in-out py-2 px-3"
+          >
+            <option value="">-- Choose a dish --</option>
+          </select>
+
+          <!-- Lookup Button -->
+          <button
+            id="lookup"
+            class="mt-4 w-full bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow hover:bg-green-700 transition duration-200 ease-in-out"
+          >
+            🔍 Find Recipe
+          </button>
+        </div>
+      </section>
+
+      <!-- Recipe Content -->
+      <section class="max-w-4xl mx-auto px-4 py-10 space-y-8">
+        <!-- Image -->
+        <div class="rounded-xl overflow-hidden shadow-md">
+          <img id="foodImage" src="https://source.unsplash.com/800x400/?food" alt="Dish Image" class="w-full h-auto object-cover" />
+        </div>
+
+        <!-- Name & Category -->
+        <div class="text-center">
+          <h2 id="titles" class="text-2xl font-bold text-gray-800">Suggested Dish</h2>
+          <p id="disc" class="text-sm text-gray-500 mt-1">Based on what you’ve got, this might be a winner!</p>
+        </div>
+
+        <!-- Used Ingredients from Your Input -->
+        <div>
+        <h3 class="text-xl font-semibold text-gray-800 mb-4">🧂 Used Ingredients from Your Input</h3>
+      
+         <table id="used-ingredients" class="min-w-full divide-y divide-gray-200 rounded-lg shadow-md overflow-hidden">
+  <thead class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white">
+    <tr>
+      <th class="px-6 py-3 text-left text-sm font-semibold tracking-wider">Ingredient</th>
+      <th class="px-6 py-3 text-left text-sm font-semibold tracking-wider">Amount</th>
+      <th class="px-6 py-3 text-left text-sm font-semibold tracking-wider">Unit</th>
+    </tr>
+  </thead>
+ 
+</table>
+        
+      </div>
+
+        <!-- Ingredients Table -->
+        <div>
+          <h3 class="text-xl font-semibold text-gray-800 mb-4">🧂 What You’ll Need</h3>
+          <table id="missed-ingredients" class="min-w-full divide-y divide-gray-200 rounded-lg shadow-md overflow-hidden">
+  <thead class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white">
+    <tr>
+      <th class="px-6 py-3 text-left text-sm font-semibold tracking-wider">Ingredient</th>
+      <th class="px-6 py-3 text-left text-sm font-semibold tracking-wider">Amount</th>
+      <th class="px-6 py-3 text-left text-sm font-semibold tracking-wider">Unit</th>
+    </tr>
+  </thead>
+ 
+</table>
+
+        </div>
+
+        <!-- Instructions -->
+        <div>
+          <h2 class="text-xl font-semibold text-gray-800 mb-4">📝 How to Cook It</h2>
+          <h3 id="instraction"></h3>
+        </div>
+
+        <!-- YouTube Video -->
+        <div>
+          <h3 class="text-xl font-semibold text-gray-800 mb-4">🎥 Step-by-Step Video</h3>
+          <div class="aspect-w-16 aspect-h-9 rounded-xl overflow-hidden shadow-md">
+            <iframe
+              id="tube"
+              class="w-full h-64 sm:h-96"
+              src="https://www.youtube.com/embed/3AAdKl1UYZs"
+              title="Cooking Tutorial"
+              frameborder="0"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+
+        <!-- Blog Redirect -->
+        <div class="text-center mt-12">
+          <p class="text-lg text-gray-700 mb-3">Want more tips for making the most of what’s in your fridge?</p>
+          <a
+            id="blog"
+            href="https://your-blog-link.com"
+            target="_blank"
+            class="inline-block bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition font-semibold"
+          >
+            Read Full Blog Post →
+          </a>
+        </div>
+      </section>
+
+      <!-- Footer -->
+     <footer class="bg-gray-900 text-gray-300">
+      <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 grid sm:grid-cols-3 gap-8">
+        <div>
+          <h3 class="text-white text-xl font-bold mb-2">Fridge Stalker</h3>
+          <p>Turn your fridge into a flavor adventure — discover dishes, master recipes, and let every meal spark a little joy. 🍳</p>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-2">Contact</h4>
+          <p>Email: <a href="mailto:eazybel27@gmail.com" class="text-blue-400 hover:underline">eazybel27@gmail.com</a></p>
+          <p>Phone: +2519-405-843-23</p>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-2">Contact Us</h4>
+          <div class="flex gap-4">
+        <a href="https://linkedin.com/in/syntaxdesigns" class="hover:text-blue-500 transition text-xl"><i class="fabfa-linkedin-in"></i></a>
+        <a href="t.me/syntaxdesigns" class="hover:text-pink-400 transition text-xl"><i class="fab fa-telegram"></i></a>
+        <a href="www.syntax.pro.et" class="hover:text-sky-400 transition text-xl"><i class="fa-solid fa-globe"></i></a>
+      </div>
+        </div>
+      </div>
+      <div class="text-center text-sm border-t border-gray-700 pt-4 pb-6">
+        © 2025 Syntax Designs. All rights reserved.
+      </div>
+    </footer>
+
+      <script src="find.js"></script>
+    </main>
+  </body>
+</html>

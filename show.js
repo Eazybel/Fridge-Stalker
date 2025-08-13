@@ -1,112 +1,112 @@
-const drop = document.getElementById("food-select");
-const titles = document.getElementById("titles");
-const disc = document.getElementById("disc");
-const blog = document.getElementById("blog");
-const tube = document.getElementById("tube");
-const lookup = document.getElementById("lookup");
-const usedingredients = document.getElementById("used-ingredients");
-const missedingredients = document.getElementById("missed-ingredients");
+const selected=document.getElementById("food-select")
+const lookup=document.getElementById("lookup")
+const foodImage=document.getElementById("foodImage")
+const ingredients=document.getElementById("ingredients")
+const instraction=document.getElementById("instraction")
+const blog=document.getElementById("blog")
+const tube=document.getElementById("tube")
+const title=document.getElementById("title")
+const spinner=document.getElementById("spinner")
+const disc=document.getElementById("disc")
+const option=document.querySelectorAll("option")
+const main=document.querySelector("main")
+const storage=localStorage.length
+for (let i = 0; i < storage; i++) {
+   if(localStorage.getItem(i).includes("What to make for dinner tonight??")){
+    let replace=localStorage.getItem(i).replace("What to make for dinner tonight??","")
+localStorage.setItem(i,replace)
+}
+const found=`<option value="${localStorage.getItem(i)}">${localStorage.getItem(i)}</option>`
+ selected.innerHTML+=found
+}
 
-const identifier = async () => {
-  for (let i = 0; i < localStorage.length; i++) {
-    let recievedAll = localStorage.getItem(i);
-    let data = JSON.parse(recievedAll);
-    drop.innerHTML += `<option value="${data.title}">${data.title}</option>`;
-  }
-  let recieved = localStorage.getItem(1);
-  let data = JSON.parse(recieved);
-  let used = data.usedIngredients;
-  titles.innerText = data.title;
-  for (let i = 0; i < used.length; i++) {
-    usedingredients.innerHTML +=
-     `<tbody class="bg-white divide-y divide-gray-100">
-    <!-- Example row -->
-    <tr>
-      <td class="px-6 py-4 text-sm text-gray-700">${used[i].name}</td>
-      <td class="px-6 py-4 text-sm text-gray-700">${used[i].amount}</td>
-      <td class="px-6 py-4 text-sm text-gray-700">${used[i].unit}</td>
-    </tr>
-    <!-- Add more rows dynamically -->
-  </tbody>`;
-  }
-  let unused = data.missedIngredients;
-  let missed = data.missedIngredients;
-  for (let i = 0; i < missed.length; i++) {
-    missedingredients.innerHTML += 
-    `<tbody class="bg-white divide-y divide-gray-100">
-    <!-- Example row -->
-    <tr>
-      <td class="px-6 py-4 text-sm text-gray-700">${missed[i].name}</td>
-      <td class="px-6 py-4 text-sm text-gray-700">${missed[i].amount}</td>
-      <td class="px-6 py-4 text-sm text-gray-700">${missed[i].unit}</td>
-    </tr>
-    <!-- Add more rows dynamically -->
-  </tbody>`;
-  }
-
-  const res1= await fetch(`https://api.spoonacular.com/recipes/${data.id}/information?includeNutrition=true&apiKey=061deef803d54c4e8034727f78f93b10`)
-      const data1=await res1.json()
-      //  const tubeRes=await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=how+to+make+${data.title}&type=video&key=AIzaSyAP-oIoX3192ixcZbQ7IwEVYBZ9oTUmreM`)
-      //  const tubeData=await tubeRes.json()
-      blog.setAttribute("href",data1.sourceUrl)
-      // tube.setAttribute("href",data1.sourceUrl)
-      instraction.innerHTML=data1.instructions
-      //  tube.setAttribute("src",`https://www.youtube.com/embed/${tubeData.items[0].id.videoId}`)
-   foodImage.setAttribute("src",data1.image)
-};
-identifier();
-lookup.onclick = async () => {
-  let outer;
-  for (let i = 0; i < localStorage.length; i++) {
-    let parsed = JSON.parse(localStorage.getItem(i));
-    if (parsed.title === drop.value) {
-      parsed = parsed;
-      outer = parsed;
-    }
-  }
-  titles.innerText = outer.title;
-  usedingredients.innerHTML= 
-  `<tr>
-      <th class="px-6 py-3 text-left text-sm font-semibold tracking-wider">Ingredient</th>
-      <th class="px-6 py-3 text-left text-sm font-semibold tracking-wider">Amount</th>
-      <th class="px-6 py-3 text-left text-sm font-semibold tracking-wider">Unit</th>
-    </tr>`;
-  missedingredients.innerHTML= 
-  `<tr>
-      <th class="px-6 py-3 text-left text-sm font-semibold tracking-wider">Ingredient</th>
-      <th class="px-6 py-3 text-left text-sm font-semibold tracking-wider">Amount</th>
-      <th class="px-6 py-3 text-left text-sm font-semibold tracking-wider">Unit</th>
-    </tr>`;
-  for (let i = 0; i < outer.usedIngredients.length; i++) {
-    usedingredients.innerHTML += 
-    `<tbody class="bg-white divide-y divide-gray-100">
-    <!-- Example row -->
-    <tr>
-      <td class="px-6 py-4 text-sm text-gray-700">${outer.usedIngredients[i].name}</td>
-      <td class="px-6 py-4 text-sm text-gray-700">${outer.usedIngredients[i].amount}</td>
-      <td class="px-6 py-4 text-sm text-gray-700">${outer.usedIngredients[i].unit}</td>
-    </tr>
-    <!-- Add more rows dynamically -->
-  </tbody>`;
-  }
-  for (let i = 0; i < outer.missedIngredients.length; i++) {
-    missedingredients.innerHTML +=
-    `<tbody class="bg-white divide-y divide-gray-100">
-    <!-- Example row -->
-    <tr>
-      <td class="px-6 py-4 text-sm text-gray-700">${outer.missedIngredients[i].name}</td>
-      <td class="px-6 py-4 text-sm text-gray-700">${outer.missedIngredients[i].amount}</td>
-      <td class="px-6 py-4 text-sm text-gray-700">${outer.missedIngredients[i].unit}</td>
-    </tr>
-    <!-- Add more rows dynamically -->
-  </tbody>`;
-  }
-  const res1= await fetch(`https://api.spoonacular.com/recipes/${outer.id}/information?includeNutrition=true&apiKey=061deef803d54c4e8034727f78f93b10`)
+const defaulted=async() =>{
+  main.style.display="none"
+  spinner.classList.remove("hidden")
+  const res=await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${localStorage.getItem(0)}&number=1&apiKey=4a12b45436ee468ab2e129244d4beaaf`)
+  if (res.status===402) {
+  alert("Am sorry too many request for today try again tomorrow")
+}
+  const data=await res.json()
+  title.innerText=localStorage.getItem(0)
+    const id=data.results[0].id
+   const res1= await fetch(`https://api.spoonacular.com/recipes/${id}/information?includeNutrition=true&apiKey=4a12b45436ee468ab2e129244d4beaaf`)
+   if (res.status===402) {
+  alert("Am sorry too many request for today try again tomorrow")
+}
     const data1=await res1.json()
-    const tubeRes=await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=how+to+make+${outer.title}&type=video&key=AIzaSyAP-oIoX3192ixcZbQ7IwEVYBZ9oTUmreM`)
-       const tubeData=await tubeRes.json()
-      blog.setAttribute("href",data1.sourceUrl)
-      tube.setAttribute("href",`https://www.youtube.com/embed/${tubeData.items[0].id.videoId}`)
-      instraction.innerHTML=data1.instructions
-   foodImage.setAttribute("src",data1.image)
-};
+     const tubeRes=await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=how+to+make+${data.results[0].title}&type=video&key=AIzaSyAP-oIoX3192ixcZbQ7IwEVYBZ9oTUmreM`)
+     if (res.status===402) {
+  alert("Am sorry too many request for today try again tomorrow")
+}
+     const tubeData=await tubeRes.json()
+    blog.setAttribute("href",data1.sourceUrl)
+    instraction.innerHTML=data1.instructions
+     tube.setAttribute("src",`https://www.youtube.com/embed/${tubeData.items[0].id.videoId}`)
+     foodImage.setAttribute("src",data1.image) 
+     disc.innerText="Dish Type: "+data1.dishTypes
+     data1.extendedIngredients.forEach(item => {
+        ingredients.innerHTML+=`<tr>
+                                  <td>${item.name}</td>
+                                  <td>${item.amount}</td>
+                                  <td>${item.measures.metric.unitLong}</td>
+                                </tr>`
+     });
+  
+    
+
+}
+defaulted().then(()=>{
+     main.style.display="block"
+  spinner.classList.add("hidden")
+})
+
+lookup.onclick=async()=>{
+    
+    if (selected.value==="") {
+        return alert("Please Select The Dish From The Options")
+    }
+  try {
+    main.style.display="none"
+  spinner.classList.remove("hidden")
+    const res= await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${selected.value}&number=1&apiKey=4a12b45436ee468ab2e129244d4beaaf`)
+    if (res.status===402) {
+  alert("Am sorry too many request for today try again tomorrow")
+}
+    const data=await res.json()
+   title.innerText=data.results[0].title
+    const id=data.results[0].id
+
+   const res1= await fetch(`https://api.spoonacular.com/recipes/${id}/information?includeNutrition=true&apiKey=4a12b45436ee468ab2e129244d4beaaf`)
+   if (res.status===402) {
+  alert("Am sorry too many request for today try again tomorrow")
+}
+    const data1=await res1.json()
+     const tubeRes=await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=how+to+make+${data.results[0].title}&type=video&key=AIzaSyAP-oIoX3192ixcZbQ7IwEVYBZ9oTUmreM`)
+     if (res.status===402) {
+  alert("Am sorry too many request for today try again tomorrow")
+}
+     const tubeData=await tubeRes.json()
+    blog.setAttribute("href",data1.sourceUrl)
+    instraction.innerHTML=data1.instructions
+     tube.setAttribute("src",`https://www.youtube.com/embed/${tubeData.items[0].id.videoId}`)
+     foodImage.setAttribute("src",data1.image) 
+     disc.innerText="Dish Type: "+data1.dishTypes
+     data1.extendedIngredients.forEach(item => {
+        ingredients.innerHTML+=` <tr>
+      <th class="px-6 py-3 text-left text-sm font-semibold tracking-wider">${item.name}</th>
+      <th class="px-6 py-3 text-left text-sm font-semibold tracking-wider">${item.amount}</th>
+      <th class="px-6 py-3 text-left text-sm font-semibold tracking-wider">${item.measures.metric.unitLong}</th>
+    </tr>`
+        
+     });
+  
+ 
+  } catch (error) {
+    console.log(error)
+  }finally{
+    main.style.display="block"
+  spinner.classList.add("hidden")
+  }
+
+}
