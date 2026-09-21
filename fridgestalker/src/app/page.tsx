@@ -125,7 +125,7 @@ router.push(`/category/${category}`)
                 </div>
 
                 {/* Action Link / Button */}
-                <Link href={`/category/${category.strCategory}`} className="w-full py-2.5 px-4 rounded-xl bg-slate-50 text-slate-700 font-medium text-sm group-hover:bg-orange-500 group-hover:text-white transition-colors duration-200 flex items-center justify-center gap-2">
+                <Link target="_blank" href={`/category/${category.strCategory}`} className="w-full py-2.5 px-4 rounded-xl bg-slate-50 text-slate-700 font-medium text-sm group-hover:bg-orange-500 group-hover:text-white transition-colors duration-200 flex items-center justify-center gap-2">
                   <span>Explore Meals</span>
                   <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
