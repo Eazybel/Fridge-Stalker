@@ -1,3 +1,4 @@
+"use client"
 import {useState,useEffect} from "react"
 
 export default function Home() {
@@ -15,11 +16,13 @@ setCategory(data)
 setLoad(false)
 }
 }
+fetchCategory()
   },[])
 return(
 
   <>
   {isLoading&& <p>Loading</p>}
+  {error&&console.log(error)}
   {category&&
   
   console.log(category)
