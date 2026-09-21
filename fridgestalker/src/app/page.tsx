@@ -1,8 +1,14 @@
 "use client"
+type categoryType={
+  strCategory:string,
+  strCategoryThumb:string,
+  strCategoryDescription:string
+
+}
 import {useState,useEffect} from "react"
 import Image from "next/image"
 export default function Home() {
-  const [category,setCategory]=useState({})
+  const [category,setCategory]=useState<categoryType[]|undefined>([])
   const [isLoading,setLoad]=useState(true)
   const [error,setError]=useState({})
   useEffect(()=>{
@@ -24,15 +30,26 @@ return(
   {isLoading&& <p>Loading</p>}
   {error&&console.log(error)}
   {category&&
-   <div>
-    <Image
-    alt="category image"
-    src="https://www.themealdb.com/images/category/pasta.png"
-    width={500}
-    height={500}
-        />
-  </div>
-      }
+
+  <>
+  {
+    category.map((categories:categoryType,index:number)=>{
+ 
+   return <div key={index}>
+      <h1>{categories.strCategory}</h1>
+      <p>{categories.strCategoryDescription}</p>
+      <Image
+      src={`${categories.strCategoryThumb}`}
+      alt="category Image"
+      width={200}
+      height={200}
+      />
+    </div>
+  
+ })
+  }
+  </>
+  }
       {category&&console.log(category)}
   </>
 )
