@@ -46,9 +46,10 @@ fetchMeal()
           width={500}
           height={500}
           />
-          {/* <Link
-          href={}
-          /> */}
+          <Link
+          target="_blank"
+          href={`/meal/${meal.strMeal}`}
+          >See Recipi</Link>
         </div>
       })
     }
