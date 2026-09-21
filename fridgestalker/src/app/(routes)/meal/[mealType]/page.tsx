@@ -8,7 +8,7 @@ type mealType = {
     strInstractions:string,
     strMeal:string,
     strMealThumb:string,
-    strMealYoutube:string,
+    strYoutube:string
 }
 
 import {useState,useEffect} from 'react'
