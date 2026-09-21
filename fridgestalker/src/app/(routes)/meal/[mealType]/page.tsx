@@ -1,3 +1,4 @@
+"use client"
 type Props = {}
 import {useState,useEffect} from 'react'
 import {useRouter,useParams} from "next/navigation"
