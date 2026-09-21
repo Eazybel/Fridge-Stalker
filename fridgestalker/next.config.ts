@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'img.spoonacular.com',
+        hostname: 'hwww.themealdb.com',
         pathname: '/**',
       },
     ],

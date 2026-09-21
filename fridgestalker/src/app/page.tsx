@@ -1,6 +1,6 @@
 "use client"
 import {useState,useEffect} from "react"
-
+import Image from "next/image"
 export default function Home() {
   const [category,setCategory]=useState({})
   const [isLoading,setLoad]=useState(true)
@@ -24,9 +24,16 @@ return(
   {isLoading&& <p>Loading</p>}
   {error&&console.log(error)}
   {category&&
-  
-  console.log(category)
+   <div>
+    <Image
+    alt="category image"
+    src="https://www.themealdb.com/images/category/pasta.png"
+    width={500}
+    height={500}
+        />
+  </div>
       }
+      {category&&console.log(category)}
   </>
 )
 }
