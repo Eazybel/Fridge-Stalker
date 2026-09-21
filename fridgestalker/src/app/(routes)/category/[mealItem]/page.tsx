@@ -84,6 +84,7 @@ export default function MealItems() {
             <div>
               <div className="relative h-48 w-full overflow-hidden bg-gray-100">
                 <Image
+                
                   src={meal.strMealThumb}
                   alt={meal.strMeal}
                   fill
