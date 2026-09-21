@@ -14,7 +14,7 @@ try{
 const res=await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${paramsItem}`)
 const data=await res.json()
 console.log(data)
-}catch(error:any)'{
+}catch(error:any){
 setLoad(false)
 setError(error)
 }finally{
