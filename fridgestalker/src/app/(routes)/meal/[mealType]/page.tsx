@@ -54,9 +54,6 @@ fetchData()
         error&&<p>{error}</p>
     }
     {
-  
-    
-    
         recipe&&
         <>
         
