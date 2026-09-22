@@ -5,11 +5,10 @@ type mealType = {
     strCategory:string,
     strCountry:string,
     strMeasure:string,
-    strIngredient:string,
     strInstractions:string,
     strMeal:string,
     strMealThumb:string,
-    strYoutube:string
+    strYoutube:string,
 }
 type mealTypePartia=Partial<mealType>
 // @ts-ignore
@@ -19,8 +18,9 @@ import Image from "next/image"
 import {useParams} from "next/navigation"
 export default function page() {
     const paramsItem=useParams<{mealType:string}>()
-    const [recipe,setRecipe]=useState<mealTypePartia|undefined>(undefined)
+    const [recipe,setRecipe]=useState<mealTypePartia>()
     const [isLoading,setLoad]=useState(true)
+    const [ingredients,setIngredients]=useState()
     const [url,setUrl]=useState("")
     const [error,setError]=useState(null)
 useEffect(()=>{
@@ -34,6 +34,8 @@ if(recipe?.strYoutube){
 const strUrl=recipe?.strYoutube.split("v=")[1]
 const validUrl=`https://www.youtube.com/embed/${strUrl}`
 setUrl(validUrl)
+const ingredientKeys=Object.keys(recipe)
+console.log(ingredientKeys)
 }
 } catch (error:any) {
     setError(error)
@@ -47,6 +49,7 @@ fetchData()
 },[recipe?.idMeal])
   return (
    <>
+   
     {
         isLoading&&<p>Loading</p>
     }
@@ -56,7 +59,6 @@ fetchData()
     {
         recipe&&
         <>
-        
         <p>{recipe.idMeal}</p>
         <p>{recipe.strArea}</p>
         <p>{recipe.strCategory}</p>
@@ -75,6 +77,7 @@ fetchData()
         width={300}
         height={300}
         src={url?`${url}`:undefined}>How to make it?</iframe>
+      
         </>
       
 
