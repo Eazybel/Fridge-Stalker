@@ -1,88 +1,229 @@
-"use client"
+"use client";
+
 type mealType = {
-    idMeal:string,
-    strArea:string,
-    strCategory:string,
-    strCountry:string,
-    strMeasure:string,
-    strInstractions:string,
-    strMeal:string,
-    strMealThumb:string,
-    strYoutube:string,
-}
-type mealTypePartia=Partial<mealType>
-// @ts-ignore
-import ReactPlayer from "react-player/lazy"
-import {useState,useEffect} from 'react'
-import Image from "next/image"
-import {useParams} from "next/navigation"
-export default function page() {
-    const paramsItem=useParams<{mealType:string}>()
-    const [recipe,setRecipe]=useState<mealTypePartia>()
-    const [isLoading,setLoad]=useState(true)
-    const [ingredients,setIngredients]=useState()
-    const [url,setUrl]=useState("")
-    const [error,setError]=useState(null)
-useEffect(()=>{
-const fetchData=async()=>{
-try {
-const res =await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${paramsItem.mealType}`)
-const data=await res.json() 
-setRecipe(data.meals[0])
-setLoad(false)
-if(recipe?.strYoutube){
-const strUrl=recipe?.strYoutube.split("v=")[1]
-const validUrl=`https://www.youtube.com/embed/${strUrl}`
-setUrl(validUrl)
-const ingredientKeys=Object.keys(recipe)
-console.log(ingredientKeys)
-}
-} catch (error:any) {
-    setError(error)
-    setLoad(false)
-}finally{
-setLoad(false)
-}
+  idMeal: string;
+  strArea: string;
+  strCategory: string;
+  strCountry: string;
+  strMeasure: string;
+  strInstructions: string;
+  strMeal: string;
+  strMealThumb: string;
+  strYoutube: string;
+  keys: string;
+};
+type mealTypePartia = Partial<mealType>;
 
-}
-fetchData()
-},[recipe?.idMeal])
-  return (
-   <>
-   
-    {
-        isLoading&&<p>Loading</p>
-    }
-    {
-        error&&<p>{error}</p>
-    }
-    {
-        recipe&&
-        <>
-        <p>{recipe.idMeal}</p>
-        <p>{recipe.strArea}</p>
-        <p>{recipe.strCategory}</p>
-        <p>{recipe.strCountry}</p>
-        <p>{recipe.strMeal}</p>
-        <p></p>
-            <Image
-            src={`${recipe.strMealThumb}`}
-            width={500}
-            height={500}
-            alt="food thumbnail"
-            loading="eager"
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import { useParams } from "next/navigation";
+
+export default function Page() {
+  const paramsItem = useParams<{ mealType: string }>();
+  const [recipe, setRecipe] = useState<mealTypePartia>();
+  const [isLoading, setLoad] = useState(true);
+  const [url, setUrl] = useState("");
+  const [error, setError] = useState<any>(null);
+  const [ingredients, setIngredients] = useState<any[]>([]);
+  const [measures, setMeasures] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch(
+          `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${paramsItem.mealType}`
+        );
+        if (!res.ok) throw new Error("Failed to fetch recipe details");
+        
+        const data = await res.json();
+        const fetchedMeal = data.meals[0];
+        setRecipe(fetchedMeal);
+
+        // Handle YouTube URL extraction safely
+        if (fetchedMeal?.strYoutube) {
+          const strUrl = fetchedMeal.strYoutube.split("v=")[1]?.split("&")[0];
+          if (strUrl) {
+            setUrl(`https://www.youtube.com/embed/${strUrl}`);
+          }
+        }
+
+        // Handle Dynamic Ingredients & Measures loop
+        if (fetchedMeal?.idMeal) {
+          const meals = fetchedMeal as Record<string, any>;
+          const newIngredient: string[] = [];
+          const newMeasure: string[] = [];
+          
+          for (let i = 1; i <= 20; i++) {
+            const ing = meals[`strIngredient${i}`];
+            const mea = meals[`strMeasure${i}`];
             
-            />
-        <iframe
-        width={300}
-        height={300}
-        src={url?`${url}`:undefined}>How to make it?</iframe>
-      
-        </>
-      
+            if (ing && ing.trim() !== "") {
+              newIngredient.push(ing);
+              newMeasure.push(mea ? mea.trim() : "");
+            }
+          }
+          setIngredients(newIngredient);
+          setMeasures(newMeasure);
+        }
+      } catch (err: any) {
+        setError(err.message || "An error occurred");
+      } finally {
+        setLoad(false);
+      }
+    };
 
+    if (paramsItem?.mealType) {
+      fetchData();
     }
-   
-   </>
-  )
+  }, [paramsItem?.mealType]);
+
+  // Loading Skeleton State
+  if (isLoading) {
+    return (
+      <main className="min-h-screen bg-slate-50/60 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto bg-white rounded-3xl p-6 sm:p-10 shadow-sm border border-slate-100 animate-pulse space-y-8">
+          <div className="h-8 bg-slate-200 rounded-xl w-3/4"></div>
+          <div className="w-full h-96 bg-slate-200 rounded-2xl"></div>
+          <div className="space-y-3">
+            <div className="h-5 bg-slate-200 rounded-md w-full"></div>
+            <div className="h-5 bg-slate-200 rounded-md w-5/6"></div>
+          </div>
+        </div>
+      </main>
+    );
+  }
+
+  // Error State
+  if (error) {
+    return (
+      <main className="min-h-screen bg-slate-50/60 flex items-center justify-center p-4">
+        <div className="max-w-md w-full text-center py-12 px-6 bg-white rounded-3xl border border-red-100 shadow-sm">
+          <div className="w-14 h-14 bg-red-50 text-red-500 rounded-2xl flex items-center justify-center mx-auto mb-4 text-xl">
+            ⚠️
+          </div>
+          <h3 className="text-lg font-bold text-slate-900 mb-1">Failed to load recipe</h3>
+          <p className="text-sm text-slate-500">{error}</p>
+        </div>
+      </main>
+    );
+  }
+
+  // Split instructions by line breaks to create steps
+  const instructionSteps = recipe?.strInstructions
+    ? recipe.strInstructions.split(/\r?\n/).filter((step) => step.trim() !== "")
+    : [];
+
+  return (
+    <main className="min-h-screen bg-slate-50/60 py-12 px-4 sm:px-6 lg:px-8">
+      {recipe && (
+        <div className="max-w-4xl mx-auto bg-white rounded-3xl shadow-sm border border-slate-200/80 overflow-hidden">
+          
+          {/* Header Banner Section */}
+          <div className="p-6 sm:p-10 border-b border-slate-100 bg-gradient-to-b from-orange-500/5 via-transparent to-transparent">
+            <div className="flex flex-wrap items-center gap-2 mb-3">
+              {recipe.strCategory && (
+                <span className="px-3 py-1 rounded-full bg-orange-100 text-orange-700 text-xs font-semibold tracking-wide uppercase">
+                  {recipe.strCategory}
+                </span>
+              )}
+              {recipe.strArea && (
+                <span className="px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold tracking-wide uppercase">
+                  🌍 {recipe.strArea}
+                </span>
+              )}
+            </div>
+            
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+              {recipe.strMeal}
+            </h1>
+            <p className="text-xs text-slate-400 mt-1">Recipe ID: {recipe.idMeal}</p>
+          </div>
+
+          <div className="p-6 sm:p-10 space-y-10">
+            
+            {/* Main Image */}
+            {recipe.strMealThumb && (
+              <div className="relative w-full h-[350px] sm:h-[450px] rounded-2xl overflow-hidden bg-slate-100 shadow-inner">
+                <Image
+                  src={recipe.strMealThumb}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 800px"
+                  alt={recipe.strMeal || "Food thumbnail"}
+                  priority
+                  className="object-cover"
+                />
+              </div>
+            )}
+
+            {/* Ingredients & Measures Table Section */}
+            <div className="space-y-4">
+              <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+                <span>🛒</span> Ingredients & Measurements
+              </h2>
+              
+              <div className="border border-slate-200 rounded-2xl overflow-hidden shadow-xs">
+                <table className="w-full text-left border-collapse">
+                  <thead>
+                    <tr className="bg-slate-50 border-b border-slate-200 text-slate-700 text-sm font-semibold">
+                      <th className="py-3.5 px-6">Ingredient</th>
+                      <th className="py-3.5 px-6">Measure</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100 text-sm text-slate-600">
+                    {ingredients.map((ingredient: string, index: number) => (
+                      <tr key={index} className="hover:bg-slate-50/80 transition-colors">
+                        <td className="py-3 px-6 font-medium text-slate-900">{ingredient}</td>
+                        <td className="py-3 px-6 text-orange-600 font-semibold">{measures[index] || "To taste"}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Instructions Section */}
+            {instructionSteps.length > 0 && (
+              <div className="space-y-4">
+                <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+                  <span>📝</span> Step-by-Step Instructions
+                </h2>
+                <div className="space-y-3">
+                  {instructionSteps.map((step, index) => (
+                    <div 
+                      key={index} 
+                      className="flex gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-100 text-slate-700 text-sm leading-relaxed"
+                    >
+                      <span className="flex-shrink-0 w-7 h-7 rounded-xl bg-orange-100 text-orange-700 font-bold text-xs flex items-center justify-center">
+                        {index + 1}
+                      </span>
+                      <p className="pt-0.5">{step}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Video Tutorial Section */}
+            {url && (
+              <div className="space-y-4">
+                <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+                  <span>🎥</span> Video Tutorial
+                </h2>
+                <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-md border border-slate-200 bg-slate-900">
+                  <iframe
+                    src={url}
+                    title={recipe.strMeal || "Recipe Video"}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="absolute inset-0 w-full h-full border-0"
+                  />
+                </div>
+              </div>
+            )}
+
+          </div>
+        </div>
+      )}
+    </main>
+  );
 }
