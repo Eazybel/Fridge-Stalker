@@ -12,7 +12,8 @@ type mealType = {
     strYoutube:string
 }
 type mealTypePartia=Partial<mealType>
-
+// @ts-ignore
+import ReactPlayer from "react-player/lazy"
 import {useState,useEffect} from 'react'
 import {useParams} from "next/navigation"
 export default function page() {
@@ -53,7 +54,7 @@ fetchData()
         <p>{recipe.strCountry}</p>
         <p>{recipe.strMeal}</p>
         <p>{recipe.strMealThumb}</p>
-        <p>{recipe.strYoutube}</p>
+        <iframe src="https://www.youtube.com/embed/9ytR28QK6I8">How to make it?</iframe>
         </>
       
 
