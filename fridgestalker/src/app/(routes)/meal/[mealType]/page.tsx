@@ -17,6 +17,8 @@ type mealTypePartia = Partial<mealType>;
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
+import MealLoader from "@/app/components/MEALCOMPONENT/mealloader"
+import MealError from "@/app/components/MEALCOMPONENT/mealError"
 
 export default function Page() {
   const paramsItem = useParams<{ mealType: string }>();
@@ -79,33 +81,13 @@ export default function Page() {
 
   // Loading Skeleton State
   if (isLoading) {
-    return (
-      <main className="min-h-screen bg-slate-50/60 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto bg-white rounded-3xl p-6 sm:p-10 shadow-sm border border-slate-100 animate-pulse space-y-8">
-          <div className="h-8 bg-slate-200 rounded-xl w-3/4"></div>
-          <div className="w-full h-96 bg-slate-200 rounded-2xl"></div>
-          <div className="space-y-3">
-            <div className="h-5 bg-slate-200 rounded-md w-full"></div>
-            <div className="h-5 bg-slate-200 rounded-md w-5/6"></div>
-          </div>
-        </div>
-      </main>
-    );
+    return  <MealLoader/>
+    
   }
 
   // Error State
   if (error) {
-    return (
-      <main className="min-h-screen bg-slate-50/60 flex items-center justify-center p-4">
-        <div className="max-w-md w-full text-center py-12 px-6 bg-white rounded-3xl border border-red-100 shadow-sm">
-          <div className="w-14 h-14 bg-red-50 text-red-500 rounded-2xl flex items-center justify-center mx-auto mb-4 text-xl">
-            ⚠️
-          </div>
-          <h3 className="text-lg font-bold text-slate-900 mb-1">Failed to load recipe</h3>
-          <p className="text-sm text-slate-500">{error}</p>
-        </div>
-      </main>
-    );
+    return <MealError error={error}/>
   }
 
   // Split instructions by line breaks to create steps
