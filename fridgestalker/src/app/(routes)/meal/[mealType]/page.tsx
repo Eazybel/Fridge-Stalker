@@ -17,8 +17,8 @@ type mealTypePartia = Partial<mealType>;
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import MealLoader from "@/app/components/MEALCOMPONENT/mealloader"
-import MealError from "@/app/components/MEALCOMPONENT/mealError"
+import Mealloader from "@/app/components/MEALCOMPONENTS/mealloader"
+import MealError from "@/app/components/MEALCOMPONENTS/mealError"
 
 export default function Page() {
   const paramsItem = useParams<{ mealType: string }>();
@@ -81,7 +81,7 @@ export default function Page() {
 
   // Loading Skeleton State
   if (isLoading) {
-    return  <MealLoader/>
+    return  <Mealloader/>
     
   }
 
