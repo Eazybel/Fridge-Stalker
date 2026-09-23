@@ -1,13 +1,17 @@
 "use client";
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
 const changeHandler=(e:React.ChangeEvent<HTMLInputElement>)=>{
   console.log(e.target.value)
 }
+useEffect(()=>{
+
+},[])
+
   return (
     <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200 shadow-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -15,10 +19,10 @@ const changeHandler=(e:React.ChangeEvent<HTMLInputElement>)=>{
           
           {/* Brand / Logo */}
           <Link href="/" className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 to-orange-500 flex items-center justify-center text-white shadow-md shadow-orange-500/25">
+            <div className="w-10 h-10 rounded-xl bg-liniar-to-tr from-amber-500 to-orange-500 flex items-center justify-center text-white shadow-md shadow-orange-500/25">
               <span className="text-lg font-bold">🍳</span>
             </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent tracking-tight">
+            <span className="text-xl font-bold bg-liniar-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent tracking-tight">
               Flavor<span className="text-orange-500">Forge</span>
             </span>
           </Link>
