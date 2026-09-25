@@ -66,8 +66,12 @@ export default function Header({allMeals}:any) {
               {/* Custom Dropdown List Styling */}
               <ul className="absolute left-0 top-full mt-1 w-full bg-white border border-slate-200 rounded-xl shadow-lg max-h-60 overflow-y-auto z-50">
                 {allMeals.map((meals:mealsType,index:number)=>{
-                    {console.log(meals.idMeal)}
-                    return <li onClick={()=>clickHandler(meals.idMeal)} key={index} className={`${isChanged?"":"hidden"} px-4 py-2.5 text-sm text-slate-700 hover:bg-orange-50 hover:text-orange-600 cursor-pointer transition-colors border-b border-slate-50 last:border-none`}>
+                    return <li onMouseDown={(e)=>{
+                        e.preventDefault()
+                        clickHandler(meals.idMeal)
+                    }} 
+                    
+                    key={index} className={`${isChanged?"":"hidden"} px-4 py-2.5 text-sm text-slate-700 hover:bg-orange-50 hover:text-orange-600 cursor-pointer transition-colors border-b border-slate-50 last:border-none`}>
                   {meals.strMeal}
                 </li>
                 })
