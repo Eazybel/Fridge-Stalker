@@ -123,7 +123,7 @@ export default function Header({allMeals}:any) {
       {allMeals&&<datalist id="categoryList">
              {
               allMeals.map((meal:Record<string,any>)=>{
-                return <option value={meal.idMeal} key={meal.strMeal}>{meal.strMeal}</option>
+                return <option key={meal.strMeal}>{meal.strMeal}</option>
               })
              }
 </datalist>}
