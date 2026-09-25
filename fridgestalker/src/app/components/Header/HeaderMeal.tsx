@@ -1,16 +1,19 @@
 "use client";
 import Link from 'next/link';
 import React, { useState } from 'react';
-type mealsType={
-    strMeal:string,
-    idMeal:string
+import { useRouter } from "next/navigation";
+
+type mealsType = {
+    strMeal: string,
+    idMeal: string
 }
-export default function Header({allMeals}:any) {
+
+export default function Header({ allMeals }: any) {
   const [isOpen, setIsOpen] = useState(false);
-  const [isChanged,setChange]=useState(false)
-  const clickHandler=(id:string)=>{
-    console.log(id)
-  }
+  const [isChanged, setChange] = useState(false);
+  const [mobileSearchChanged, setMobileSearchChanged] = useState(false);
+  const router = useRouter();
+
   return (
     <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200 shadow-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -54,8 +57,8 @@ export default function Header({allMeals}:any) {
                   </svg>
                 </label>
                 <input 
-                onFocus={()=>setChange(true)}
-                onBlur={()=>setChange(false)}
+                  onFocus={() => setChange(true)}
+                  onBlur={() => setChange(false)}
                   type="text" 
                   id="meal-search" 
                   placeholder="Search meals..." 
@@ -65,17 +68,20 @@ export default function Header({allMeals}:any) {
 
               {/* Custom Dropdown List Styling */}
               <ul className="absolute left-0 top-full mt-1 w-full bg-white border border-slate-200 rounded-xl shadow-lg max-h-60 overflow-y-auto z-50">
-                {allMeals.map((meals:mealsType,index:number)=>{
-                    return <li onMouseDown={(e)=>{
-                        e.preventDefault()
-                        clickHandler(meals.idMeal)
-                    }} 
-                    
-                    key={index} className={`${isChanged?"":"hidden"} px-4 py-2.5 text-sm text-slate-700 hover:bg-orange-50 hover:text-orange-600 cursor-pointer transition-colors border-b border-slate-50 last:border-none`}>
-                  {meals.strMeal}
-                </li>
-                })
-                }
+                {allMeals.map((meals: mealsType, index: number) => {
+                  return (
+                    <li 
+                      onMouseDown={(e) => {
+                        e.preventDefault();
+                        router.push(`/meal/${meals.idMeal}`);
+                      }} 
+                      key={index} 
+                      className={`${isChanged ? "" : "hidden"} px-4 py-2.5 text-sm text-slate-700 hover:bg-orange-50 hover:text-orange-600 cursor-pointer transition-colors border-b border-slate-50 last:border-none`}
+                    >
+                      {meals.strMeal}
+                    </li>
+                  );
+                })}
               </ul>
             </div>
            
@@ -107,6 +113,8 @@ export default function Header({allMeals}:any) {
           {/* Mobile Search Bar with Dropdown Structure */}
           <div className="relative sm:hidden pb-2">
             <input 
+              onFocus={() => setMobileSearchChanged(true)}
+              onBlur={() => setMobileSearchChanged(false)}
               type="text" 
               placeholder="Search meals..." 
               className="w-full px-4 py-2 bg-slate-100 border border-transparent rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-orange-500"
@@ -114,9 +122,21 @@ export default function Header({allMeals}:any) {
 
             {/* Custom Dropdown List Styling */}
             <ul className="absolute left-0 top-full mt-1 w-full bg-white border border-slate-200 rounded-xl shadow-lg max-h-60 overflow-y-auto z-50">
-              <li className="px-4 py-2.5 text-sm text-slate-700 hover:bg-orange-50 hover:text-orange-600 cursor-pointer transition-colors border-b border-slate-50 last:border-none">
-                Sample Item
-              </li>
+              {allMeals.map((meals: mealsType, index: number) => {
+                return (
+                  <li 
+                    onMouseDown={(e) => {
+                      e.preventDefault();
+                      setIsOpen(false);
+                      router.push(`/meal/${meals.idMeal}`);
+                    }} 
+                    key={index} 
+                    className={`${mobileSearchChanged ? "" : "hidden"} px-4 py-2.5 text-sm text-slate-700 hover:bg-orange-50 hover:text-orange-600 cursor-pointer transition-colors border-b border-slate-50 last:border-none`}
+                  >
+                    {meals.strMeal}
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
