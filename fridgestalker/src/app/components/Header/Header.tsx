@@ -1,21 +1,36 @@
 "use client";
-
+type categoryType={
+  strCategory:string
+}
 import Link from 'next/link';
 import { useState,useEffect } from 'react';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
-const changeHandler=(e:React.ChangeEvent<HTMLInputElement>)=>{
-  console.log(e.target.value)
+  const [items,setItems]=useState<string[]>([])
+useEffect(()=>{
+  const controller=new AbortController
+  const {signal}=controller
+fetch(`https://www.themealdb.com/api/json/v1/1/categories.php`,{signal})
+.then(res=>{
+  if(!res.ok){
+     throw new Error("Something went wrong")
+     return
+  }
+  return res.json()
+})
+.then(data=>{
+ data.categories.forEach((category:categoryType)=>{
+  items.push(category.strCategory)
+ })
+})
+.catch(err=>{
+  console.log(err)
+})
+return()=>{
+  controller.abort("Canceled By Redirect")
 }
-// useEffect(()=>{
-//   const controller=new AbortController
-//   const {signal}=controller
-// fetch(``,{signal})
-// return()=>{
-//   controller.abort()
-// }
-// },[])
+},[])
 
   return (
     <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200 shadow-xs">
@@ -58,13 +73,14 @@ const changeHandler=(e:React.ChangeEvent<HTMLInputElement>)=>{
                 </svg>
               </label>
               <input 
-              onChange={changeHandler}
                 type="text" 
+                list="categoryList"
                 id="meal-search" 
                 placeholder="Search meals..." 
                 className="w-full pl-10 pr-4 py-2 bg-slate-100 border border-transparent rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all"
               />
             </div>
+           
 
             {/* Mobile Menu Toggle Button */}
             <button 
@@ -95,6 +111,7 @@ const changeHandler=(e:React.ChangeEvent<HTMLInputElement>)=>{
           {/* Optional Mobile Search Bar */}
           <div className="relative sm:hidden pb-2">
             <input 
+             list="categoryList"
               type="text" 
               placeholder="Search meals..." 
               className="w-full px-4 py-2 bg-slate-100 border border-transparent rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-orange-500"
@@ -131,6 +148,15 @@ const changeHandler=(e:React.ChangeEvent<HTMLInputElement>)=>{
           </Link>
         </div>
       )}
+      {items&&<datalist id="categoryList">
+             {
+              items.map(item=>{
+                return <option value={item} key={item}>{item}</option>
+              })
+             }
+         
+             
+            </datalist>}
     </header>
   );
 }
