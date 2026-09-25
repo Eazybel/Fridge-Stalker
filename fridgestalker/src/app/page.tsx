@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import {useRouter} from 'next/navigation'
 import Image from "next/image";
 import Link from "next/link";
+import HeaderCategory from "@/app/components/Header/HeaderCategory"
 
 type CategoryType = {
   strCategory: string;
@@ -39,8 +40,9 @@ router.push(`/category/${category}`)
     fetchCategory();
   }, []);
 
-  return (
+  return (<>
     <main className="min-h-screen bg-slate-50/50 pb-20">
+    <HeaderCategory/>
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-b from-orange-500/10 via-amber-500/5 to-transparent pt-12 pb-16 px-4 sm:px-6 lg:px-8 border-b border-slate-200/60 mb-12">
         <div className="max-w-7xl mx-auto text-center">
@@ -138,5 +140,6 @@ router.push(`/category/${category}`)
 
       </div>
     </main>
-  );
+  
+  </>);
 }

@@ -92,7 +92,7 @@ setItems(prevItem=>[...prevItem,category.strCategory])
                 type="text" 
                 list="categoryList"
                 id="meal-search" 
-                placeholder="Search meals..." 
+                placeholder="Search Categories..." 
                 className="w-full pl-10 pr-4 py-2 bg-slate-100 border border-transparent rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all"
               />
             </form>

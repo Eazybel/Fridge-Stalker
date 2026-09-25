@@ -1,11 +1,12 @@
-import Header from "@/app/components/Header/HeaderCategory"
-export default function RootLayout({ children }: LayoutProps<"/">) {
+import HeaderMeal from "@/app/components/Header/HeaderMeal"
+import React from "react";
+export default function RootLayout({ children }:{children:React.ReactNode}) {
   return (
-    <html lang="en">
-      <body className="min-h-full flex flex-col">
-        <Header/>
+
+       <>
+        <HeaderMeal/>
         {children}
-        </body>
-    </html>
+       </>
+       
   );
 }

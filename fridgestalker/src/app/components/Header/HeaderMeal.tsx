@@ -1,35 +1,13 @@
-import HeaderMeal from "@/app/components/Header/HeaderMeal"
 "use client";
-type categoryType={
-  strCategory:string
-}
+
 import Link from 'next/link';
 import { useState,useEffect } from 'react';
-import { useRouter,usePathname} from 'next/navigation';
-
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [items,setItems]=useState<string[]>([])
-  const router=useRouter()
-  const currentPath=usePathname()
-  const changeHandler=(e:React.KeyboardEvent<HTMLInputElement>)=>{
-    
-   if(e.key==="Enter"){
-e.preventDefault()
- const matchedItem=items.find(item=>{
-return item.toLowerCase()===e.currentTarget.value.toLowerCase()
- })
- if(matchedItem){
-   router.push(`category/${e.currentTarget.value}`)
- }else{
-  alert("Please select from the provided opions")
-  e.currentTarget.value=""
- }
-  }
-  }
 useEffect(()=>{
 
-    
+
 },[])
 
   return (
@@ -73,7 +51,7 @@ useEffect(()=>{
                 </svg>
               </label>
               <input 
-              onKeyDown={changeHandler}
+       
                 type="text" 
                 list="categoryList"
                 id="meal-search" 
