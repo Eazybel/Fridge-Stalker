@@ -15,19 +15,18 @@ fetch(`https://www.themealdb.com/api/json/v1/1/categories.php`,{signal})
 .then(res=>{
   if(!res.ok){
      throw new Error("Something went wrong")
-     return
   }
   return res.json()
 })
 .then(data=>{
  data.categories.forEach((category:categoryType)=>{
-  items.push(category.strCategory)
+setItems(prevItem=>[...prevItem,category.strCategory])
  })
 })
 .catch(err=>{
   console.log(err)
 })
-return()=>{
+ return()=>{
   controller.abort("Canceled By Redirect")
 }
 },[])
@@ -154,9 +153,7 @@ return()=>{
                 return <option value={item} key={item}>{item}</option>
               })
              }
-         
-             
-            </datalist>}
+</datalist>}
     </header>
   );
 }
