@@ -1,8 +1,16 @@
 "use client";
 import Link from 'next/link';
-import { useState } from 'react';
+import React, { useState } from 'react';
+type mealsType={
+    strMeal:string,
+    idMeal:string
+}
 export default function Header({allMeals}:any) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isChanged,setChange]=useState(false)
+  const clickHandler=(id:string)=>{
+    console.log(id)
+  }
   return (
     <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200 shadow-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -10,10 +18,10 @@ export default function Header({allMeals}:any) {
           
           {/* Brand / Logo */}
           <Link href="/" className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-liniar-to-tr from-amber-500 to-orange-500 flex items-center justify-center text-white shadow-md shadow-orange-500/25">
+            <div className="w-10 h-10 rounded-xl bg-linear-to-tr from-amber-500 to-orange-500 flex items-center justify-center text-white shadow-md shadow-orange-500/25">
               <span className="text-lg font-bold">🍳</span>
             </div>
-            <span className="text-xl font-bold bg-liniar-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent tracking-tight">
+            <span className="text-xl font-bold bg-linear-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent tracking-tight">
               Flavor<span className="text-orange-500">Forge</span>
             </span>
           </Link>
@@ -36,24 +44,37 @@ export default function Header({allMeals}:any) {
 
           {/* Search Input & Actions */}
           <div className="flex items-center gap-4">
-            {/* Search Input */}
-            <form className="relative hidden sm:block w-48 lg:w-64">
-              <label htmlFor="meal-search" className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                </svg>
-              </label>
-              <input 
-       
-                type="text" 
-                list="categoryList"
-                id="meal-search" 
-                placeholder="Search meals..." 
-                className="w-full pl-10 pr-4 py-2 bg-slate-100 border border-transparent rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all"
-              />
-            </form>
-           
+            
+            {/* Desktop Search Input with Dropdown Structure */}
+            <div className="relative hidden sm:block w-48 lg:w-64">
+              <form className="relative">
+                <label htmlFor="meal-search" className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                  </svg>
+                </label>
+                <input 
+                onFocus={()=>setChange(true)}
+                onBlur={()=>setChange(false)}
+                  type="text" 
+                  id="meal-search" 
+                  placeholder="Search meals..." 
+                  className="w-full pl-10 pr-4 py-2 bg-slate-100 border border-transparent rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all"
+                />
+              </form>
 
+              {/* Custom Dropdown List Styling */}
+              <ul className="absolute left-0 top-full mt-1 w-full bg-white border border-slate-200 rounded-xl shadow-lg max-h-60 overflow-y-auto z-50">
+                {allMeals.map((meals:mealsType,index:number)=>{
+                    {console.log(meals.idMeal)}
+                    return <li onClick={()=>clickHandler(meals.idMeal)} key={index} className={`${isChanged?"":"hidden"} px-4 py-2.5 text-sm text-slate-700 hover:bg-orange-50 hover:text-orange-600 cursor-pointer transition-colors border-b border-slate-50 last:border-none`}>
+                  {meals.strMeal}
+                </li>
+                })
+                }
+              </ul>
+            </div>
+           
             {/* Mobile Menu Toggle Button */}
             <button 
               onClick={() => setIsOpen(!isOpen)} 
@@ -61,12 +82,10 @@ export default function Header({allMeals}:any) {
               aria-label="Open Menu"
             >
               {isOpen ? (
-                // Close Icon (X)
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
               ) : (
-                // Hamburger Icon
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
@@ -80,53 +99,37 @@ export default function Header({allMeals}:any) {
       {/* Mobile Dropdown Menu */}
       {isOpen && (
         <div className="md:hidden border-t border-slate-200 bg-white px-4 pt-3 pb-5 space-y-2 shadow-lg">
-          {/* Optional Mobile Search Bar */}
+          
+          {/* Mobile Search Bar with Dropdown Structure */}
           <div className="relative sm:hidden pb-2">
             <input 
-             list="categoryList"
               type="text" 
               placeholder="Search meals..." 
               className="w-full px-4 py-2 bg-slate-100 border border-transparent rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-orange-500"
             />
+
+            {/* Custom Dropdown List Styling */}
+            <ul className="absolute left-0 top-full mt-1 w-full bg-white border border-slate-200 rounded-xl shadow-lg max-h-60 overflow-y-auto z-50">
+              <li className="px-4 py-2.5 text-sm text-slate-700 hover:bg-orange-50 hover:text-orange-600 cursor-pointer transition-colors border-b border-slate-50 last:border-none">
+                Sample Item
+              </li>
+            </ul>
           </div>
 
-          <Link 
-            href="/" 
-            onClick={() => setIsOpen(false)}
-            className="block px-3 py-2 rounded-lg text-base font-medium bg-orange-50 text-orange-600"
-          >
+          <Link href="/" onClick={() => setIsOpen(false)} className="block px-3 py-2 rounded-lg text-base font-medium bg-orange-50 text-orange-600">
             Home
           </Link>
-          <Link 
-            href="/pantry" 
-            onClick={() => setIsOpen(false)}
-            className="block px-3 py-2 rounded-lg text-base font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900"
-          >
+          <Link href="/pantry" onClick={() => setIsOpen(false)} className="block px-3 py-2 rounded-lg text-base font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900">
             Smart Pantry
           </Link>
-          <Link 
-            href="/planner" 
-            onClick={() => setIsOpen(false)}
-            className="block px-3 py-2 rounded-lg text-base font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900"
-          >
+          <Link href="/planner" onClick={() => setIsOpen(false)} className="block px-3 py-2 rounded-lg text-base font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900">
             Meal Planner
           </Link>
-          <Link 
-            href="/favorites" 
-            onClick={() => setIsOpen(false)}
-            className="block px-3 py-2 rounded-lg text-base font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900"
-          >
+          <Link href="/favorites" onClick={() => setIsOpen(false)} className="block px-3 py-2 rounded-lg text-base font-medium text-slate-600 hover:text-slate-900">
             Favorites
           </Link>
         </div>
       )}
-      {allMeals&&<datalist id="categoryList">
-             {
-              allMeals.map((meal:Record<string,any>)=>{
-                return <option key={meal.strMeal}>{meal.strMeal}</option>
-              })
-             }
-</datalist>}
     </header>
   );
 }
