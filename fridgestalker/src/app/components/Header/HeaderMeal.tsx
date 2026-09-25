@@ -1,15 +1,8 @@
 "use client";
-
 import Link from 'next/link';
-import { useState,useEffect } from 'react';
-export default function Header() {
+import { useState } from 'react';
+export default function Header({allMeals}:any) {
   const [isOpen, setIsOpen] = useState(false);
-  const [items,setItems]=useState<string[]>([])
-useEffect(()=>{
-
-
-},[])
-
   return (
     <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200 shadow-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -127,10 +120,10 @@ useEffect(()=>{
           </Link>
         </div>
       )}
-      {items&&<datalist id="categoryList">
+      {allMeals&&<datalist id="categoryList">
              {
-              items.map(item=>{
-                return <option value={item} key={item}>{item}</option>
+              allMeals.map((meal:Record<string,any>)=>{
+                return <option value={meal.idMeal} key={meal.strMeal}>{meal.strMeal}</option>
               })
              }
 </datalist>}

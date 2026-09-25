@@ -3,8 +3,9 @@ import { useState, useEffect } from 'react';
 import { useParams } from "next/navigation";
 import Image from "next/image";
 import Link from 'next/link';
+import HeaderMeal from "@/app/components/Header/HeaderMeal"
 
-type MealsType = {
+export type MealsType = {
   idMeal: string;
   strArea?: string;
   strCountry?: string;
@@ -16,7 +17,6 @@ export default function MealItems() {
   const [meals, setMeals] = useState<MealsType[] | []>([]); // safe init
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  
   const paramsItem = useParams<{ mealItem: string }>();
 
   useEffect(() => {
@@ -69,7 +69,9 @@ export default function MealItems() {
   }
 
   // 4. Main Grid View
-  return (
+  return (<>
+  <HeaderMeal allMeals={meals}/>
+  
     <div className="max-w-7xl mx-auto px-4 py-8">
       <h1 className="text-3xl font-extrabold text-gray-900 mb-8 capitalize">
         Category: {paramsItem?.mealItem}
@@ -88,6 +90,7 @@ export default function MealItems() {
                   src={meal.strMealThumb}
                   alt={meal.strMeal}
                   fill
+                  sizes="auto"
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
@@ -115,5 +118,6 @@ export default function MealItems() {
         ))}
       </div>
     </div>
-  );
+  
+  </>);
 }
