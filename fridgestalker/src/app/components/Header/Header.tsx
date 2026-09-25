@@ -8,9 +8,14 @@ export default function Header() {
 const changeHandler=(e:React.ChangeEvent<HTMLInputElement>)=>{
   console.log(e.target.value)
 }
-useEffect(()=>{
-
-},[])
+// useEffect(()=>{
+//   const controller=new AbortController
+//   const {signal}=controller
+// fetch(``,{signal})
+// return()=>{
+//   controller.abort()
+// }
+// },[])
 
   return (
     <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200 shadow-xs">
