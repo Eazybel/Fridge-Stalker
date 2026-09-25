@@ -1,15 +1,17 @@
+import HeaderMeal from "@/app/components/Header/HeaderMeal"
 "use client";
 type categoryType={
   strCategory:string
 }
 import Link from 'next/link';
 import { useState,useEffect } from 'react';
-import { useRouter} from 'next/navigation';
+import { useRouter,usePathname} from 'next/navigation';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [items,setItems]=useState<string[]>([])
   const router=useRouter()
+  const currentPath=usePathname()
   const changeHandler=(e:React.KeyboardEvent<HTMLInputElement>)=>{
     
    if(e.key==="Enter"){
@@ -26,26 +28,8 @@ return item.toLowerCase()===e.currentTarget.value.toLowerCase()
   }
   }
 useEffect(()=>{
-  const controller=new AbortController
-  const {signal}=controller
-fetch(`https://www.themealdb.com/api/json/v1/1/categories.php`,{signal})
-.then(res=>{
-  if(!res.ok){
-     throw new Error("Something went wrong")
-  }
-  return res.json()
-})
-.then(data=>{
- data.categories.forEach((category:categoryType)=>{
-setItems(prevItem=>[...prevItem,category.strCategory])
- })
-})
-.catch(err=>{
-  console.log(err)
-})
- return()=>{
-  controller.abort("Canceled By Redirect")
-}
+
+    
 },[])
 
   return (
