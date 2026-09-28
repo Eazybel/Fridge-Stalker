@@ -12,6 +12,13 @@ export default function Header() {
   const [mobileSearchChanged, setMobileSearchChanged] = useState(false);
   const [items, setItems] = useState<string[]>([])
   const router = useRouter()
+  const filterSearch=(e:React.ChangeEvent<HTMLInputElement>)=>{
+    const inputValue=e.target.value
+   const similarItem= items.filter(item=>{
+     return item.includes(inputValue)
+    })
+    console.log(similarItem)
+  }
 
   useEffect(()=>{
     const controller = new AbortController
@@ -81,7 +88,7 @@ export default function Header() {
                 <input 
                   onFocus={() => setChange(true)}
                   onBlur={() => setChange(false)}
-                  
+                  onChange={filterSearch}
                   type="text" 
                   id="meal-search" 
                   placeholder="Search Categories..." 
