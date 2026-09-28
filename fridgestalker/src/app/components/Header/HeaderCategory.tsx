@@ -143,7 +143,7 @@ export default function Header() {
             <input 
               onFocus={() => setMobileSearchChanged(true)}
               onBlur={() => setMobileSearchChanged(false)}
-           
+             onChange={(e)=>setFilter(e.target.value)}
               type="text" 
               placeholder="Search Categories..." 
               className="w-full px-4 py-2 bg-slate-100 border border-transparent rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-orange-500"
@@ -151,7 +151,7 @@ export default function Header() {
 
             {/* Mobile Dropdown List */}
             <ul className="absolute left-0 top-full mt-1 w-full bg-white border border-slate-200 rounded-xl shadow-lg max-h-60 overflow-y-auto z-50">
-              {items.map((item: string, index: number) => {
+              {filteredServices.map((item: string, index: number) => {
                 return (
                   <li 
                     onMouseDown={(e) => {
