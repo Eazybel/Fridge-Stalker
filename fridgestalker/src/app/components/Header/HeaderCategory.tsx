@@ -3,7 +3,7 @@ type categoryType={
   strCategory:string
 }
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState, useEffect,useRef } from 'react';
 import { useRouter, usePathname} from 'next/navigation';
 
 export default function Header() {
@@ -12,12 +12,12 @@ export default function Header() {
   const [mobileSearchChanged, setMobileSearchChanged] = useState(false);
   const [items, setItems] = useState<string[]>([])
   const router = useRouter()
+  const filterItem=useRef<any>([])
   const filterSearch=(e:React.ChangeEvent<HTMLInputElement>)=>{
-    const inputValue=e.target.value
-   const similarItem= items.filter(item=>{
-     return item.includes(inputValue)
-    })
-    console.log(similarItem)
+    const inputValue=e.target.value.toLowerCase()
+   if(filterItem.current.innerText.toLowerCase().includes(inputValue)){
+    console.log(filterItem)
+   }
   }
 
   useEffect(()=>{
@@ -101,6 +101,7 @@ export default function Header() {
                 {items.map((item: string, index: number) => {
                   return (
                     <li 
+                    ref={filterItem}
                       onMouseDown={(e) => {
                         e.preventDefault();
                         router.push(`category/${item}`);
