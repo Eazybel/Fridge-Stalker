@@ -9,16 +9,12 @@ import { useRouter, usePathname} from 'next/navigation';
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isChanged, setChange] = useState(false);
+  const [filter, setFilter] = useState("");
   const [mobileSearchChanged, setMobileSearchChanged] = useState(false);
   const [items, setItems] = useState<string[]>([])
   const router = useRouter()
-  const filterItem=useRef<any>([])
-  const filterSearch=(e:React.ChangeEvent<HTMLInputElement>)=>{
-    const inputValue=e.target.value.toLowerCase()
-   if(filterItem.current.innerText.toLowerCase().includes(inputValue)){
-    console.log(filterItem)
-   }
-  }
+  
+
 
   useEffect(()=>{
     const controller = new AbortController
@@ -88,7 +84,7 @@ export default function Header() {
                 <input 
                   onFocus={() => setChange(true)}
                   onBlur={() => setChange(false)}
-                  onChange={filterSearch}
+                  onChange={(e)=>setFilter(e.target.value)}
                   type="text" 
                   id="meal-search" 
                   placeholder="Search Categories..." 
@@ -101,7 +97,6 @@ export default function Header() {
                 {items.map((item: string, index: number) => {
                   return (
                     <li 
-                    ref={filterItem}
                       onMouseDown={(e) => {
                         e.preventDefault();
                         router.push(`category/${item}`);
