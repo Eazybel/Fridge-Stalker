@@ -3,8 +3,8 @@ type categoryType={
   strCategory:string
 }
 import Link from 'next/link';
-import { useState, useEffect,useRef } from 'react';
-import { useRouter, usePathname} from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { useRouter} from 'next/navigation';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,7 +13,9 @@ export default function Header() {
   const [mobileSearchChanged, setMobileSearchChanged] = useState(false);
   const [items, setItems] = useState<string[]>([])
   const router = useRouter()
-  
+  const filteredServices=items.filter(el=>{
+   return el.toLowerCase().includes(filter.toLowerCase())
+  })
 
 
   useEffect(()=>{
@@ -94,7 +96,7 @@ export default function Header() {
 
               {/* Desktop Dropdown List */}
               <ul className="absolute left-0 top-full mt-1 w-full bg-white border border-slate-200 rounded-xl shadow-lg max-h-60 overflow-y-auto z-50">
-                {items.map((item: string, index: number) => {
+                {filteredServices.map((item: string, index: number) => {
                   return (
                     <li 
                       onMouseDown={(e) => {
