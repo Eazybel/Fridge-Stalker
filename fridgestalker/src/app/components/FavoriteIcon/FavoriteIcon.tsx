@@ -1,9 +1,15 @@
-import React, {useState} from "react"
+import {useState,useEffect} from "react"
+import {MealsType} from "@/app/(routes)/category/[mealItem]/page"
+type propsType={
+  allMeals:MealsType[]
+}
 
-
-export default function FavoriteIcon() {
-    const [checked,setCheck]=useState(false)
-
+export default function FavoriteIcon(props:propsType) {
+const [checked,setCheck]=useState(false)
+useEffect(()=>{
+const {allMeals}=props
+console.log(allMeals)
+},[])
   return (
      <div className="absolute top-3 right-3 z-10">
             <label className="relative flex items-center justify-center p-2.5 rounded-full bg-white/80 backdrop-blur-md shadow-md cursor-pointer hover:bg-white transition-all">
