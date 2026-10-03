@@ -80,6 +80,7 @@ export default function MealItems() {
 
      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
   {meals?.map((meal) => (
+    
     <div 
       key={meal.idMeal} 
       className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col justify-between group"
@@ -118,6 +119,7 @@ export default function MealItems() {
           See Recipe
         </Link>
       </div>
+     
     </div>
   ))}
 </div>

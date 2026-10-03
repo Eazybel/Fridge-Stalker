@@ -1,13 +1,13 @@
-import {useState} from "react"
+import React, {useState} from "react"
 
 
 export default function FavoriteIcon() {
-    const [isChanged,setChange]=useState(false)
     const [checked,setCheck]=useState(false)
+
   return (
      <div className="absolute top-3 right-3 z-10">
             <label className="relative flex items-center justify-center p-2.5 rounded-full bg-white/80 backdrop-blur-md shadow-md cursor-pointer hover:bg-white transition-all">
-              <input checked={checked} onChange={()=>setChange(true)} type="checkbox" className="peer sr-only" />
+              <input onChange={(e)=>{setCheck(e.target.checked)}} type="checkbox" className="peer sr-only" />
               <svg
                 className="w-5 h-5 text-gray-500 peer-checked:text-rose-500 peer-checked:fill-rose-500 transition-colors"
                 viewBox="0 0 24 24"
