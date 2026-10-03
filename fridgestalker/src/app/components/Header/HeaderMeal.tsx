@@ -7,13 +7,19 @@ type mealsType = {
     strMeal: string,
     idMeal: string
 }
-
-export default function Header({ allMeals }: any) {
+type propsType={
+  allMeals:mealsType[]
+}
+export default function Header(props: propsType) {
   const [isOpen, setIsOpen] = useState(false);
   const [isChanged, setChange] = useState(false);
   const [mobileSearchChanged, setMobileSearchChanged] = useState(false);
+  const [filter,setFilter]=useState("")
   const router = useRouter();
-
+  const {allMeals}=props
+const filteredItems=allMeals.filter((el:mealsType)=>{
+  return el.strMeal.toLowerCase().includes(filter.toLowerCase())
+})
   return (
     <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200 shadow-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -59,6 +65,7 @@ export default function Header({ allMeals }: any) {
                 <input 
                   onFocus={() => setChange(true)}
                   onBlur={() => setChange(false)}
+                  onChange={(e)=>setFilter(e.target.value)}
                   type="text" 
                   id="meal-search" 
                   placeholder="Search meals..." 
@@ -68,7 +75,7 @@ export default function Header({ allMeals }: any) {
 
               {/* Custom Dropdown List Styling */}
               <ul className="absolute left-0 top-full mt-1 w-full bg-white border border-slate-200 rounded-xl shadow-lg max-h-60 overflow-y-auto z-50">
-                {allMeals.map((meals: mealsType, index: number) => {
+                {filteredItems.map((meals: mealsType, index: number) => {
                   return (
                     <li 
                       onMouseDown={(e) => {
@@ -121,7 +128,7 @@ export default function Header({ allMeals }: any) {
             />
 
             {/* Custom Dropdown List Styling */}
-            <ul className="absolute left-0 top-full mt-1 w-full bg-white border border-slate-200 rounded-xl shadow-lg max-h-60 overflow-y-auto z-50">
+            {/* <ul className="absolute left-0 top-full mt-1 w-full bg-white border border-slate-200 rounded-xl shadow-lg max-h-60 overflow-y-auto z-50">
               {allMeals.map((meals: mealsType, index: number) => {
                 return (
                   <li 
@@ -137,7 +144,7 @@ export default function Header({ allMeals }: any) {
                   </li>
                 );
               })}
-            </ul>
+            </ul> */}
           </div>
 
           <Link href="/" onClick={() => setIsOpen(false)} className="block px-3 py-2 rounded-lg text-base font-medium bg-orange-50 text-orange-600">
