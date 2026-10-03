@@ -5,20 +5,29 @@ type propsType={
 }
 
 export default function FavoriteIcon(props:propsType) {
-const [checked,setCheck]=useState(false)
+const [check,setCheck]=useState<boolean>(false)
 const {currentMeal}=props
+useEffect(()=>{
+if(localStorage.getItem(currentMeal)==="true"){
+  setCheck(true)
+}else{
+  setCheck(false)
+}
+},[])
 const changeHandler=(e:React.ChangeEvent<HTMLInputElement>)=>{
 const checker=e.target.checked
 if(checker){
   localStorage.setItem(currentMeal,"true")
+  setCheck(true)
 }else{
+  setCheck(false)
   localStorage.setItem(currentMeal,"false")
 }
 }
   return (
      <div className="absolute top-3 right-3 z-10">
             <label className="relative flex items-center justify-center p-2.5 rounded-full bg-white/80 backdrop-blur-md shadow-md cursor-pointer hover:bg-white transition-all">
-              <input onChange={changeHandler} type="checkbox" className="peer sr-only" />
+              <input checked={check} onChange={changeHandler} type="checkbox" className="peer sr-only" />
               <svg
                 className="w-5 h-5 text-gray-500 peer-checked:text-rose-500 peer-checked:fill-rose-500 transition-colors"
                 viewBox="0 0 24 24"
