@@ -36,11 +36,11 @@ export default function MealItems() {
         const data = await res.json();
         setMeals(data.meals || []);
         const dataMeal=data.meals
-        // fix this logic and continue {#dbc,4}
         const localData:localType[]=[]
         dataMeal.forEach((meal:MealsType)=>{
          localData.push({idMeal:meal.idMeal,favorite:false})
         })
+        console.log(localData)
       } catch (err: any) {
         setError(err.message || 'Something went wrong');
       } finally {
