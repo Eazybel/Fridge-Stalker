@@ -13,6 +13,10 @@ export type MealsType = {
   strMeal: string;
   strMealThumb: string;
 };
+type localType={
+  idMeal:string,
+  favorite:boolean
+}
 
 export default function MealItems() {
   const [meals, setMeals] = useState<MealsType[] | []>([]); // safe init
@@ -28,8 +32,14 @@ export default function MealItems() {
         
         if (!res.ok) throw new Error('Failed to fetch meals');
         
+      
         const data = await res.json();
         setMeals(data.meals || []);
+        const dataMeal=data.meals
+        const localData:localType[]=[]
+        dataMeal.forEach((meal:MealsType)=>{
+         localData.push({idMeal:meal.idMeal,favorite:false})
+        })
       } catch (err: any) {
         setError(err.message || 'Something went wrong');
       } finally {
