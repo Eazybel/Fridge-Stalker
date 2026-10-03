@@ -77,46 +77,66 @@ export default function MealItems() {
         Category: {paramsItem?.mealItem}
       </h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {meals?.map((meal) => (
-          <div 
-            key={meal.idMeal} 
-            className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col justify-between group"
-          >
-            <div>
-              <div className="relative h-48 w-full overflow-hidden bg-gray-100">
-                <Image
-                
-                  src={meal.strMealThumb}
-                  alt={meal.strMeal}
-                  fill
-                  sizes="auto"
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-              <div className="p-5">
-                <h2 className="text-lg font-semibold text-gray-800 line-clamp-1 mb-2">
-                  {meal.strMeal}
-                </h2>
-                <div className="flex items-center gap-2 text-xs text-gray-500 mb-4">
-                  {meal.strArea && <span className="bg-gray-100 px-2 py-1 rounded-md">{meal.strArea}</span>}
-                  <span className="bg-indigo-50 text-indigo-600 px-2 py-1 rounded-md font-medium">ID: {meal.idMeal}</span>
-                </div>
-              </div>
-            </div>
+     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+  {meals?.map((meal) => (
+    <div 
+      key={meal.idMeal} 
+      className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col justify-between group"
+    >
+      <div>
+        <div className="relative h-48 w-full overflow-hidden bg-gray-100">
+          <Image
+            src={meal.strMealThumb}
+            alt={meal.strMeal}
+            fill
+            sizes="auto"
+            className="object-cover group-hover:scale-105 transition-transform duration-500"
+          />
 
-            <div className="px-5 pb-5">
-              <Link
-                target="_blank"
-                href={`/meal/${meal.idMeal}`}
-                className="block w-full text-center bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2.5 px-4 rounded-xl transition-colors shadow-sm text-sm"
+          {/* Pure CSS Checkbox Toggle */}
+          <div className="absolute top-3 right-3 z-10">
+            <label className="relative flex items-center justify-center p-2.5 rounded-full bg-white/80 backdrop-blur-md shadow-md cursor-pointer hover:bg-white transition-all">
+              <input type="checkbox" className="peer sr-only" />
+              <svg
+                className="w-5 h-5 text-gray-500 peer-checked:text-rose-500 peer-checked:fill-rose-500 transition-colors"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="2"
+                fill="none"
               >
-                See Recipe
-              </Link>
-            </div>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                />
+              </svg>
+            </label>
           </div>
-        ))}
+        </div>
+
+        <div className="p-5">
+          <h2 className="text-lg font-semibold text-gray-800 line-clamp-1 mb-2">
+            {meal.strMeal}
+          </h2>
+          <div className="flex items-center gap-2 text-xs text-gray-500 mb-4">
+            {meal.strArea && <span className="bg-gray-100 px-2 py-1 rounded-md">{meal.strArea}</span>}
+            <span className="bg-indigo-50 text-indigo-600 px-2 py-1 rounded-md font-medium">ID: {meal.idMeal}</span>
+          </div>
+        </div>
       </div>
+
+      <div className="px-5 pb-5">
+        <Link
+          target="_blank"
+          href={`/meal/${meal.idMeal}`}
+          className="block w-full text-center bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2.5 px-4 rounded-xl transition-colors shadow-sm text-sm"
+        >
+          See Recipe
+        </Link>
+      </div>
+    </div>
+  ))}
+</div>
     </div>
   
   </>);
