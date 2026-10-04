@@ -3,11 +3,13 @@ import {useEffect} from 'react'
 export default function page() {
 useEffect(()=>{
 const mealData=Object.keys(localStorage)
-console.log(mealData)
-// const mealName=mealData.split(",")[1]
-// const mealId=
-// const mealThumb=
-// const mealArea=
+const mealsId:string[]=[]
+const mealsName:string[]=[]
+const mealsThumb:string[]=[]
+mealData.forEach(meal=>{
+  mealsId.push(meal.split(",")[0])
+})
+console.log(mealsId)
 },[])
   return (
     <div>page</div>
