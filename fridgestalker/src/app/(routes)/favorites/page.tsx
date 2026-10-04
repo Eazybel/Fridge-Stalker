@@ -1,5 +1,6 @@
 "use client"
 import {useEffect,useState} from 'react'
+import Image from "next/image"
 export default function page() {
   const [mealIds,setMealIds]=useState<string[]>([])
   const [mealNames,setMealNames]=useState<string[]>([])
@@ -19,6 +20,15 @@ setMealIds(mealsThumb)
 setMealThumbs(mealsId)
 },[])
   return (
-    <div>page</div>
+    <div>
+        {
+          mealIds.map((meal,index)=>{
+              return  <div>
+                        <p>{meal}</p>
+                        <p>{mealNames[index]}</p>
+                      </div>
+          })
+        }
+    </div>
   )
 }
