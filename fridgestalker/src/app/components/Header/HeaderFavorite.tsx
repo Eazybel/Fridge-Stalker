@@ -4,6 +4,6 @@ type Props = {}
 
 export default function HeaderFavorite({}: Props) {
   return (
-    <div>HeaderFavorite</div>
+    <input type="text" name="mealName" id="mealNane" />
   )
 }
