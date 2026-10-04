@@ -16,14 +16,18 @@ mealData.forEach(meal=>{
   mealsThumb.push(meal.split(",")[1])
 })
 setMealNames(mealsName)
-setMealIds(mealsThumb)
-setMealThumbs(mealsId)
+setMealIds(mealsId)
+setMealThumbs(mealsThumb)
 },[])
   return (
     <div>
         {
           mealIds.map((meal,index)=>{
               return  <div key={index}>
+                    <Image
+                       href={mealThumbs[index]}
+                       alt="mealThumb"
+                       />
                         <p>{meal}</p>
                         <p>{mealNames[index]}</p>
                       </div>
