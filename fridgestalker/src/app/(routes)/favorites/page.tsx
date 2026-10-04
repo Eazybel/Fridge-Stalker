@@ -102,6 +102,7 @@ export default function FavoritesPage() {
                   </svg>
                 </label>
                 <input
+                onChange={(e)=>{console.log(e.target.value)}}
                   type="text"
                   id="meal-search"
                   placeholder="Search Favorites..."
