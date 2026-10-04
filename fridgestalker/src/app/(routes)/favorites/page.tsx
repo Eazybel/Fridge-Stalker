@@ -1,6 +1,7 @@
 "use client"
 import {useEffect,useState} from 'react'
 import Image from "next/image"
+import Link from "next/link"
 import HeaderFavorite from '@/app/components/Header/HeaderFavorite'
 export default function page() {
   const [mealIds,setMealIds]=useState<string[]>([])
@@ -35,6 +36,11 @@ setMealThumbs(mealsThumb)
                        />
                         <p>{meal}</p>
                         <p>{mealNames[index]}</p>
+                      <Link
+                      href={`/meal/${mealIds[index]}`}
+                      >
+                          How to do it?
+                      </Link>
                       </div>
           })
         }
