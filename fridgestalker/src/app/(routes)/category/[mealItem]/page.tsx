@@ -101,7 +101,7 @@ export default function MealItems() {
           />
 
           {/* Pure CSS Checkbox Toggle */}
-         <FavoriteIcon currentMeal={meal.idMeal}/>
+         <FavoriteIcon currentMeal={`${meal.idMeal},${meal.strMeal},${meal.strMealThumb},${meal.strArea}`}/>
         </div>
 
         <div className="p-5">
