@@ -1,6 +1,7 @@
 "use client"
 import {useEffect,useState} from 'react'
 import Image from "next/image"
+import HeaderFavorite from '@/app/components/Header/HeaderFavorite'
 export default function page() {
   const [mealIds,setMealIds]=useState<string[]>([])
   const [mealNames,setMealNames]=useState<string[]>([])
@@ -22,6 +23,7 @@ setMealThumbs(mealsThumb)
 },[])
   return (
     <div>
+      <HeaderFavorite/>
         {
           mealIds.map((meal,index)=>{
               return  <div key={index}>
