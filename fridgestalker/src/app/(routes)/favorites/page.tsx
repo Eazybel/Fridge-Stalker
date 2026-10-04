@@ -23,7 +23,7 @@ setMealThumbs(mealsId)
     <div>
         {
           mealIds.map((meal,index)=>{
-              return  <div>
+              return  <div key={index}>
                         <p>{meal}</p>
                         <p>{mealNames[index]}</p>
                       </div>
