@@ -13,11 +13,12 @@ const mealsThumb:string[]=[]
 mealData.forEach(meal=>{
   mealsId.push(meal.split(",")[0])
   mealsName.push(meal.split(",")[1])
-  mealsThumb.push(meal.split(",")[1])
+  mealsThumb.push(meal.split(",")[2])
 })
 setMealNames(mealsName)
 setMealIds(mealsId)
 setMealThumbs(mealsThumb)
+
 },[])
   return (
     <div>
@@ -25,8 +26,10 @@ setMealThumbs(mealsThumb)
           mealIds.map((meal,index)=>{
               return  <div key={index}>
                     <Image
-                       href={mealThumbs[index]}
+                       src={mealThumbs[index]}
                        alt="mealThumb"
+                       width={500}
+                       height={500}
                        />
                         <p>{meal}</p>
                         <p>{mealNames[index]}</p>
