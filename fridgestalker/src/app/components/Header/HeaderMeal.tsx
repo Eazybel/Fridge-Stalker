@@ -154,7 +154,7 @@ export default function Header(props: propsType) {
           <Link href="/" onClick={() => setIsOpen(false)} className="block px-3 py-2 rounded-lg text-base font-medium bg-orange-50 text-orange-600">
             Home
           </Link>
-          <Link href="/pantry" onClick={() => setIsOpen(false)} className="block px-3 py-2 rounded-lg text-base font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900">
+          <Link href="/smartPantry" onClick={() => setIsOpen(false)} className="block px-3 py-2 rounded-lg text-base font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900">
             Cook with What You Have
           </Link>
           <Link href="/smartPantry" onClick={() => setIsOpen(false)} className="block px-3 py-2 rounded-lg text-base font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900">

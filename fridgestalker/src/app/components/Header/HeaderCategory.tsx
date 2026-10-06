@@ -61,7 +61,7 @@ export default function Header() {
             <Link href="/" className="px-3.5 py-2 rounded-lg text-sm font-medium bg-orange-50 text-orange-600 transition-colors">
               Home
             </Link>
-            <Link href="/pantry" className="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+            <Link href="/smartPantry" className="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
               Cook with What You Have
             </Link>
             <Link href="/smartPantry" className="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
