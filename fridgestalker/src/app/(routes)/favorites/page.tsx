@@ -160,7 +160,7 @@ export default function FavoritesPage() {
             Cook with What You Have
           </Link>
           <Link
-            href="/planner"
+            href="/smartPantry"
             onClick={() => setIsOpen(false)}
             className="block px-3 py-2 rounded-lg text-base font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900"
           >

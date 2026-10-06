@@ -1,6 +1,6 @@
 
 export default function SmartPantry() {
   return (
-    <div>Smart pantry</div>
+    <div>Smart pantry page deployment</div>
   )
 }
