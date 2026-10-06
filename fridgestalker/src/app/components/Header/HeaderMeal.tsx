@@ -44,7 +44,7 @@ export default function Header(props: propsType) {
               Home
             </Link>
             <Link href="/pantry" className="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
-              Smart Pantry
+              Cook with What You Have
             </Link>
             <Link href="/planner" className="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
               Meal Planner
@@ -155,7 +155,7 @@ export default function Header(props: propsType) {
             Home
           </Link>
           <Link href="/pantry" onClick={() => setIsOpen(false)} className="block px-3 py-2 rounded-lg text-base font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900">
-            Smart Pantry
+            Cook with What You Have
           </Link>
           <Link href="/planner" onClick={() => setIsOpen(false)} className="block px-3 py-2 rounded-lg text-base font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900">
             Meal Planner
