@@ -46,12 +46,9 @@ console.log(state)
             
                <ol>
                    { meal.unusedIngredients.map((unused:usedUnusedIngredient,index:number)=>{
-                    if(!unused.name){
-                        return <li key={index}>no unused ingredient</li>
-                    }else{
-                        return <li key={index} >{unused.name}</li>
-                    }
-                        
+       
+                        return <li key={index} >{typeof unused.name}</li>
+    
                     })}
                </ol>
             
