@@ -11,7 +11,7 @@ const [state,formAction,isPending]=useActionState(formHandler,null)
     <input type="text" name="ingredients" id="ingredients" placeholder="salt,pasta,chicken"/>
     <button disabled={isPending?true:false} type="submit">Submit</button>
    </form>
-   {state&&<p>{state.data}</p>}
+   {/* {state&&<p>{state.data}</p>} */}
    {isPending&&<p>Pending ...</p>}
    </>
   )
