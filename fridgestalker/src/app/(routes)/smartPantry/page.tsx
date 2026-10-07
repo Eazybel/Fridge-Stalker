@@ -12,12 +12,15 @@ type usedUnusedIngredient={
 name:string
 }
 import Image from "next/image"
-import {useActionState, useEffect} from "react"
+import {useActionState,useState, useEffect} from "react"
 import formHandler from "@/app/util/formData"
 export default function SmartPantry() {
+
 const [state,formAction,isPending]=useActionState(formHandler,null)
 useEffect(()=>{
+
 console.log(state)
+
 },[state])
   return (
    <>
@@ -45,8 +48,9 @@ console.log(state)
             <h2>unused ingredients</h2>
             
                <ol>
-                   { meal.unusedIngredients.map((unused:usedUnusedIngredient,index:number)=>{
-       
+                 
+                   {meal.unusedIngredients.map((unused:usedUnusedIngredient,index:number)=>{
+                          
                         return <li key={index} >{typeof unused.name}</li>
     
                     })}
