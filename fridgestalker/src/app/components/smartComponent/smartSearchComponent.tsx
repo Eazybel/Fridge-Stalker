@@ -1,4 +1,4 @@
-
+import useActionState from "next"
 export default function SmartSearchComponent() {
 
   return (
