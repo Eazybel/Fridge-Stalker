@@ -1,6 +1,13 @@
 
 export default function SmartPantry() {
+
   return (
-    <div>Smart pantry page deployment </div>
+   <>
+   <form action="">
+
+    <input type="text" name="recipe" id="reipe" />
+    <button type="submit">Submit</button>
+   </form>
+   </>
   )
 }
