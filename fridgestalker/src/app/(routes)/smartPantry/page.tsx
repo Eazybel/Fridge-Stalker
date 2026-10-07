@@ -31,8 +31,8 @@ console.log(state)
     state?.data.map((meal:mealType)=>{
         return <div key={meal.id}>
             <p>{meal.id}</p>
-            <p>{meal.title
-                }</p>
+            <p>{meal.title}</p>
+           
         </div>
     })
    }
