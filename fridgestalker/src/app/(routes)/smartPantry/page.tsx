@@ -4,6 +4,7 @@ type mealType={
     title:string,
     image:string,
     usedIngredients:usedUnusedIngredient[]
+    usedIngredientCount:number
     unusedIngredients:usedUnusedIngredient[]
     missedIngredients:usedUnusedIngredient[]
 
@@ -47,13 +48,13 @@ console.log(state)
            <div>
             <h2>unused ingredients</h2>
             
-               <ol>
-                 
-                   {meal.unusedIngredients.map((unused:usedUnusedIngredient,index:number)=>{
-                          
-                        return <li key={index} >{typeof unused.name}</li>
-    
-                    })}
+           
+              <ol>
+                   {
+                    meal.unusedIngredients.length==0?(<li>none</li>):
+                   meal.unusedIngredients.map((unused:usedUnusedIngredient,index:number)=>( <li key={index} >{unused.name}</li>))
+                    
+                    }
                </ol>
             
            </div>
