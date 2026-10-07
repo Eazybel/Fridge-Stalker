@@ -3,6 +3,9 @@ import {useActionState, useEffect} from "react"
 import formHandler from "@/app/util/formData"
 export default function SmartPantry() {
 const [state,formAction,isPending]=useActionState(formHandler,null)
+useEffect(()=>{
+console.log(state)
+},[state])
   return (
    <>
    <form action={formAction}>
