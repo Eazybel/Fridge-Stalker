@@ -13,9 +13,10 @@ type usedUnusedIngredient={
 name:string
 }
 import Image from "next/image"
+import Link from "next/link"
 import {useActionState, useEffect} from "react"
 import formHandler from "@/app/util/formData"
-import SmartButton from "@/app/components/SmartButton/SmartButton"
+
 export default function SmartPantry() {
 
 const [state,formAction,isPending]=useActionState(formHandler,null)
@@ -85,7 +86,12 @@ console.log(state)
                </ol>
             
            </div>
-           <SmartButton />
+          <Link
+           href={`/smartMeal`}
+           target="_blank"
+          >
+         look up recipe?
+          </Link>
         </div>
     })
    }
