@@ -13,13 +13,48 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div className="flex min-h-screen flex-col">
           <div className="flex-1">{children}</div>
 
-          <footer className="border-t border-slate-200 bg-white/90 backdrop-blur-sm">
-            <div className="mx-auto flex max-w-7xl items-center justify-center gap-2 px-4 py-4 text-sm text-slate-600">
-              <span className="font-semibold text-slate-800">Built by Eazybel</span>
-              <span aria-hidden="true">•</span>
-              <span>Fridge Stalker</span>
-            </div>
-          </footer>
+         <footer className="border-t border-slate-200/80 bg-white/80 backdrop-blur-md">
+  <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 py-6 text-sm text-slate-600 sm:flex-row sm:px-6 lg:px-8">
+    
+    {/* Left: App Identity */}
+    <div className="flex items-center gap-2.5">
+      <span className="text-base">🧺</span>
+      <span className="font-extrabold tracking-tight text-slate-900">
+        Fridge Stalker
+      </span>
+      <span aria-hidden="true" className="text-slate-300">•</span>
+      <span className="text-[11px] font-semibold text-orange-600 bg-orange-50 px-2.5 py-0.5 rounded-full border border-orange-200/60">
+        Smart Pantry
+      </span>
+    </div>
+
+    {/* Right: Personal Brand & Portfolio Link */}
+    <div className="flex items-center gap-1.5 text-xs sm:text-sm">
+      <span>Built with precision by</span>
+      <a
+        href="https://syntax.pro.et"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="font-bold text-slate-900 hover:text-orange-500 transition-colors decoration-orange-500/30 underline underline-offset-4 hover:decoration-orange-500"
+      >
+        Syntax-Designs
+      </a>
+      <span aria-hidden="true" className="text-slate-300 mx-1">•</span>
+      <a
+        href="https://syntax.pro.et"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-1 text-xs font-medium text-slate-500 hover:text-slate-900 transition-colors"
+      >
+        <span>syntax.pro.et</span>
+        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+        </svg>
+      </a>
+    </div>
+
+  </div>
+</footer>
         </div>
       </body>
     </html>
