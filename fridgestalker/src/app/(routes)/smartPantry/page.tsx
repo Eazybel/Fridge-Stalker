@@ -87,7 +87,7 @@ console.log(state)
             
            </div>
           <Link
-           href={`/smartmeal`}
+           href={`/smartmeal/123`}
            target="_blank"
           >
          look up recipe?
