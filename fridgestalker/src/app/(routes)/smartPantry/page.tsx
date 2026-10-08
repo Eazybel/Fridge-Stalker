@@ -15,6 +15,7 @@ name:string
 import Image from "next/image"
 import {useActionState, useEffect} from "react"
 import formHandler from "@/app/util/formData"
+import SmartButton from "@/app/components/SmartButton/SmartButton"
 export default function SmartPantry() {
 
 const [state,formAction,isPending]=useActionState(formHandler,null)
@@ -84,6 +85,7 @@ console.log(state)
                </ol>
             
            </div>
+           <SmartButton />
         </div>
     })
    }
