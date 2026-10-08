@@ -3,32 +3,10 @@
 import { useActionState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import formHandler from "@/app/util/formData"
-
-type Ingredient = {
-  id?: number
-  name: string
-  original?: string
-  image?: string
-}
-
-type Meal = {
-  id: number
-  title: string
-  image: string
-  usedIngredientCount: number
-  usedIngredients: Ingredient[]
-  unusedIngredients: Ingredient[]
-  missedIngredients: Ingredient[]
-}
-
-type ActionState = {
-  data?: Meal[]
-  error?: string
-} | null
+import formHandler, { FormState, Meal } from "@/app/util/formData"
 
 export default function SmartPantry() {
-  const [state, formAction, isPending] = useActionState<ActionState, FormData>(formHandler, null)
+  const [state, formAction, isPending] = useActionState<FormState, FormData>(formHandler, null)
 
   useEffect(() => {
     if (state) {
@@ -37,7 +15,7 @@ export default function SmartPantry() {
   }, [state])
 
   // Safely verify state.data is an array before mapping
-  const meals = Array.isArray(state?.data) ? state.data : []
+  const meals: Meal[] = Array.isArray(state?.data) ? state.data : []
 
   return (
     <div className="min-h-screen bg-slate-50 py-10 px-4 sm:px-6 lg:px-8">
@@ -56,6 +34,13 @@ export default function SmartPantry() {
               Enter ingredients from your fridge to discover matching recipes.
             </p>
           </div>
+
+          {/* Error Message Display */}
+          {state?.error && (
+            <div className="p-4 bg-red-50 border border-red-200 text-red-700 text-sm rounded-xl text-left font-medium">
+              ⚠️ {state.error}
+            </div>
+          )}
 
           <form action={formAction} className="space-y-4 text-left">
             <div>
@@ -227,7 +212,7 @@ export default function SmartPantry() {
         )}
 
         {/* Empty State after search */}
-        {state && meals.length === 0 && !isPending && (
+        {state && !state.error && meals.length === 0 && !isPending && (
           <div className="text-center py-12 bg-white rounded-2xl border border-slate-200 max-w-md mx-auto">
             <p className="text-slate-500 text-sm">
               No matching recipes found for those ingredients. Try adding broader terms like "chicken" or "rice".
