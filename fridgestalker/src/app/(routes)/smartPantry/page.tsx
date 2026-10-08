@@ -36,7 +36,7 @@ console.log(state)
    {
     state?.data.map((meal:mealType)=>{
        
-        return <div key={meal.id}>
+        return <div className="border rounded-2xl border-amber-700 " key={meal.id}>
             <p>{meal.id}</p>
             <p>{meal.title}</p>
             <Image 
